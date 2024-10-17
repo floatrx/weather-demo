@@ -88,7 +88,7 @@ interface Coordinates {
   lon: number;
 }
 
-interface WeatherApiResponse {
+export interface WeatherApiResponse {
   coordinates: Coordinates;
   loading: boolean;
   lat: number;
