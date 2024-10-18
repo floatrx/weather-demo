@@ -9,6 +9,11 @@ const config: Config = {
         center: true,
         padding: '1rem',
       },
+      /**
+       * I found this solution not universal, because best
+       * variant to adaptive elements  using container queries
+       * usecases context knowledges. But this is a good example.
+       */
       containers: {
         xxs: '10.625rem', // 170px
         xs: '12.5rem', // 200px

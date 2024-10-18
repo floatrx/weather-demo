@@ -1,3 +1,7 @@
+/**
+ * This module generated using tool "Transform":
+ * https://transform.tools/json-to-typescript
+ */
 export interface IWeatherCondition {
   id: number;
   main: string;

@@ -1,5 +1,8 @@
 @import 'variables.css';
-@import 'debug.css';
+
+/* Uncomment this for better dev-exp during debug @container queries */
+/* @import 'debug.css'; */
+/* -----------------------------------------------------------------*/
 
 @tailwind base;
 @tailwind components;

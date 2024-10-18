@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from 'react';
 
 import { cn } from '@/lib/utils/cn';
+import { Button } from '@/components/ui/Button';
 
 interface TabsProps {
   tabs: {
@@ -18,7 +19,7 @@ interface TabsProps {
   extra?: ReactNode;
 }
 
-export const Tabs = ({ tabs, classNames = {}, extra }: TabsProps) => {
+export const SimpleTabs = ({ tabs, classNames = {}, extra }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(tabs?.[0]?.id);
 
   if (!tabs) return null;
@@ -26,18 +27,20 @@ export const Tabs = ({ tabs, classNames = {}, extra }: TabsProps) => {
   return (
     <div className={cn('overflow-visible', classNames?.wrapper)}>
       {/* Tabs buttons */}
-      <ol className={cn('@lg:ml-0 -mx-4 my-1 flex w-full items-center gap-1 overflow-x-auto', classNames?.buttons)}>
+      <ol className={cn('my-1 flex w-full items-center gap-1 overflow-x-auto', classNames?.buttons)}>
         {tabs?.map(({ id, title }) => (
           <li key={id}>
-            <button
+            <Button
+              size="xs"
+              variant="ghost"
               className={cn(
-                'rounded-md border px-4 transition-all duration-100 ease-out',
-                activeTab === id ? 'scale-95 border-gray-600 bg-gray-800' : 'border-gray-700/60',
+                'rounded-md border duration-100 ease-out',
+                activeTab === id ? 'border-gray-600 bg-gray-800' : 'border-gray-700/60',
               )}
               onClick={() => setActiveTab(id)}
             >
               {title}
-            </button>
+            </Button>
           </li>
         ))}
         <li className="flex-1" />

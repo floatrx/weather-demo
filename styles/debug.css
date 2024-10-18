@@ -1,8 +1,15 @@
-/* Debug @containers */
-
+/**
+ * DEBUG HELPER!
+ * Improve your development experience during debug @container queries
+ * Some IDEs may not recognize the `@apply`
+ * directive and used tailwind syntax
+ * --- best,
+ * --- floatrx
+ */
 .card {
   position: relative;
 }
+
 .card::before {
   @apply absolute right-1 top-1 z-50 rounded px-1 text-[10px] font-black;
   @apply max-h-[15px] leading-none text-white/40;

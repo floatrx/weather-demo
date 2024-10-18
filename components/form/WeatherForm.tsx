@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 
 const WeatherForm = () => {
   const { requestLocation } = useWeatherContext();
@@ -16,8 +16,16 @@ const WeatherForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex max-w-md gap-2">
-      <Input type="text" value={cityName} onChange={(e) => setCityName(e.target.value)} placeholder="Enter city name" />
-      <Button type="submit">Submit</Button>
+      <Input
+        className="max-w-[200px]"
+        type="text"
+        value={cityName}
+        onChange={(e) => setCityName(e.target.value)}
+        placeholder="Enter city name"
+      />
+      <Button variant="outline" type="submit">
+        Submit
+      </Button>
     </form>
   );
 };
