@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../styles/globals.css';
+import { Providers } from '@/components/context/providers';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -14,18 +15,20 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Weather demo',
+  title: 'Weather | Demo',
   description: 'Just another demo Nextjs app',
+  icons: [
+    { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+    { url: '/favicon.svg', type: 'mage/svg+xml' },
+  ],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

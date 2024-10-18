@@ -23,15 +23,9 @@ const config: Config = {
         '6xl': '29.375rem', // 470px
         '7xl': '31.25rem', // 500px
       },
-
-      backgroundImage: {
-        body: "url('/bg.avif')",
-      },
-
       size: {
         icon: '6.25rem', // 100px
       },
-
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

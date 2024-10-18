@@ -23,7 +23,7 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-body bg-black text-foreground;
+    @apply bg-black text-foreground;
   }
 }
 

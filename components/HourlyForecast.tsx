@@ -4,7 +4,7 @@ import type { IHourlyForecast } from '@/types/openWeatherMap';
 import { WeatherIcon } from '@/components/WeatherIcon';
 import { DateTime } from '@/components/DateTime';
 import dayjs from 'dayjs';
-import { Card } from '@/components/Card';
+import { SimpleCard } from '@/components/SimpleCard';
 import { useState } from 'react';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { cn } from '@/lib/utils/cn';
@@ -39,7 +39,7 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({ hourlyData, layout }) 
           id: day,
           title: <DateTime timestamp={dayjs(day).unix()} format="dddd" />,
           content: (
-            <Card
+            <SimpleCard
               key={day}
               className={cn(
                 'borderless @3xl:bg-grey-800 @md:m-0 -mx-4 rounded-none border border-none border-gray-800 py-0',
@@ -74,7 +74,7 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({ hourlyData, layout }) 
                   </li>
                 ))}
               </ul>
-            </Card>
+            </SimpleCard>
           ),
         }))}
       />
