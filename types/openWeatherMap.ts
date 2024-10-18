@@ -1,11 +1,11 @@
-interface WeatherCondition {
+export interface IWeatherCondition {
   id: number;
   main: string;
   description: string;
   icon: string;
 }
 
-interface CurrentWeather {
+export interface ICurrentWeather {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -19,15 +19,16 @@ interface CurrentWeather {
   visibility: number;
   wind_speed: number;
   wind_deg: number;
-  weather: WeatherCondition[];
+  wind_gust: number;
+  weather: IWeatherCondition[];
 }
 
-interface MinutelyForecast {
+export interface IMinutelyForecast {
   dt: number;
   precipitation: number;
 }
 
-interface HourlyForecast {
+export interface IHourlyForecast {
   dt: number;
   temp: number;
   feels_like: number;
@@ -40,11 +41,12 @@ interface HourlyForecast {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  weather: WeatherCondition[];
+  weather: IWeatherCondition[];
   pop: number;
+  rain?: Record<string, number>;
 }
 
-interface DailyTemperature {
+export interface IDailyTemperature {
   day: number;
   min: number;
   max: number;
@@ -53,14 +55,14 @@ interface DailyTemperature {
   morn: number;
 }
 
-interface DailyFeelsLike {
+export interface IDailyFeelsLike {
   day: number;
   night: number;
   eve: number;
   morn: number;
 }
 
-interface DailyForecast {
+export interface IDailyForecast {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -68,35 +70,35 @@ interface DailyForecast {
   moonset: number;
   moon_phase: number;
   summary: string;
-  temp: DailyTemperature;
-  feels_like: DailyFeelsLike;
+  temp: IDailyTemperature;
+  feels_like: IDailyFeelsLike;
   pressure: number;
   humidity: number;
   dew_point: number;
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  weather: WeatherCondition[];
+  weather: IWeatherCondition[];
   clouds: number;
   pop: number;
   rain?: number;
   uvi: number;
 }
 
-interface Coordinates {
+export interface ICoordinates {
   lat: number;
   lon: number;
 }
 
-export interface WeatherApiResponse {
-  coordinates: Coordinates;
+export interface IWeatherApiResponse {
+  coordinates: ICoordinates;
   loading: boolean;
   lat: number;
   lon: number;
   timezone: string;
   timezone_offset: number;
-  current: CurrentWeather;
-  minutely: MinutelyForecast[];
-  hourly: HourlyForecast[];
-  daily: DailyForecast[];
+  current: ICurrentWeather;
+  minutely: IMinutelyForecast[];
+  hourly: IHourlyForecast[];
+  daily: IDailyForecast[];
 }

@@ -1,19 +1,21 @@
-import { fetchWeatherData } from '@/lib/api/openWeatherMap';
+import { fetchMockWeatherData } from '@/lib/api/openWeatherMap';
 import { API_KEY } from '@/config/const';
-import { WeatherWidget } from '@/components/WeatherWidget';
+import { WeatherView } from '@/components/WeatherView';
 
 export default async function Home() {
-  const weatherData = await fetchWeatherData('London');
+  const weatherData = await fetchMockWeatherData('London');
+
+  if (!weatherData) {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  if (!API_KEY) {
+    return <div className="text-center">API key not provided</div>;
+  }
 
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-        <WeatherWidget />
-        <pre>
-          <code>{JSON.stringify(weatherData, null, 2)}</code>
-        </pre>
-        <p>{API_KEY}</p>
-      </main>
-    </div>
+    <main className="mx-auto min-h-screen max-w-[90%] space-y-4 py-8">
+      <WeatherView weatherData={weatherData} />
+    </main>
   );
 }
