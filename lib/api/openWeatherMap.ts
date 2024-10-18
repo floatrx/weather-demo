@@ -2,7 +2,6 @@
 
 import { API_KEY, OPEN_WEATHER_MAP_API_URL } from '@/config/const';
 import type { IWeatherApiResponse, ICoordinates } from '@/types/openWeatherMap';
-import apiMockResponse from '@/lib/api/api.mock.response';
 
 /**
  * Fetch coordinates from OpenWeatherMap API
@@ -46,29 +45,4 @@ export const fetchWeatherDataByCoordinates = async ({ lat, lon }: ICoordinates):
     console.error('Error fetching weather data:', error);
     throw error;
   }
-};
-
-/**
- * Fetch weather data from OpenWeatherMap API
- * @param city
- */
-export const fetchWeatherDataByCityName = async (city: string): Promise<IWeatherApiResponse> => {
-  try {
-    const coordinates = await fetchCoordinates(city);
-    return fetchWeatherDataByCoordinates(coordinates);
-  } catch (error) {
-    console.error('Error fetching weather data:', error);
-    throw error;
-  }
-};
-
-/**
- * Fetch mock weather data
- * For testing and debugging purposes -> use mock data
- * OpenWeatherMap API has a limits for free usage
- * TODO: Remove this function in production
- * @param _city (added for compatibility with fetchWeatherData)
- */
-export const fetchMockWeatherData = async (_city: string): Promise<IWeatherApiResponse> => {
-  return apiMockResponse as IWeatherApiResponse;
 };
