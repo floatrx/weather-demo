@@ -7,6 +7,7 @@ Thanks authors for sharing their work.
 Link: https://www.figma.com/design/dXXsuMz9aaje7zmO6AOP4h/QWeather-Icon-(Community)
 
 ## Customize / optimize icons
+
 I shared icons in ico/3d and use <WeatherIcon> component to display them.
 
 All icons are in PNG format.

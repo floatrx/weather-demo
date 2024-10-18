@@ -18,15 +18,15 @@ export const fetchCoordinates = async (city: string): Promise<ICoordinates> => {
 
 /**
  * Fetch city name by coordinates from OpenWeatherMap API
- * @param lat
- * @param lon
+ * @param {lat, lon} - Latitude and Longitude coordinates
+ * @param loc - Location key (e.g. 'en', 'uk') -> get from browser (client side)
  */
-export const getCityNameByCoordinates = async ({ lat, lon }: ICoordinates, locale: string = 'en') => {
+export const getCityNameByCoordinates = async ({ lat, lon }: ICoordinates, loc: string): Promise<string> => {
   const response = await fetch(`${OPEN_WEATHER_MAP_API_URL}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`);
   const data = await response.json();
   if (data.length > 0) {
     const [variants] = data;
-    return variants['locale'] ?? variants.name; // City name
+    return variants[loc] ?? variants.name; // City name
   } else {
     throw new Error('City not found');
   }

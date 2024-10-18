@@ -1,10 +1,10 @@
 /*
   DOC: https://openweathermap.org/weather-conditions#Icon-list
  */
-import type { IWeatherCondition } from '@/types/openWeatherMap';
 import { cn } from '@/lib/utils/cn';
-import { WEATHER_ICONS_URL } from '@/config/const';
 import Image from 'next/image';
+
+import type { IWeatherCondition } from '@/types/openWeatherMap';
 
 interface WeatherIconProps {
   condition: IWeatherCondition;
@@ -50,6 +50,10 @@ const WeatherImage: FC<WeatherIconProps> = ({ condition, className }) => {
   );
 };
 
+/**
+ * Experiments with weather icons
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const WeatherEmoji: FC<WeatherIconProps> = ({ condition, className }) => {
   return <span className={cn('text-7xl', className)}>{iconToEmoji(condition.icon)}</span>;
 };

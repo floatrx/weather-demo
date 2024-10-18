@@ -17,8 +17,8 @@ export const DynamicDayName: FC<Props> = ({ day }) => {
   const timestamp = dayjs(day).unix();
   return (
     <>
-      <DateTime className="@xs:hidden inline" timestamp={timestamp} format="ddd" />
-      <DateTime className="@xs:inline hidden" timestamp={timestamp} format="dddd" />
+      <DateTime className="inline @xs:hidden" timestamp={timestamp} format="ddd" />
+      <DateTime className="hidden @xs:inline" timestamp={timestamp} format="dddd" />
     </>
   );
 };

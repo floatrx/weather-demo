@@ -32,26 +32,26 @@ https://icons8.com/icons/set/weather
 
 ### Bonus points
 
-- **User Input**: Include an input field/settings form for the user to enter the location for which they want to see the weather. This demonstrates knowledge of working with forms in React.
+-   **User Input**: Include an input field/settings form for the user to enter the location for which they want to see the weather. This demonstrates knowledge of working with forms in React.
 
-- **Server-Side Rendering (SSR)**: Fetch widget data on the server side of the NextJS app to demonstrate knowledge of SSR.
+-   **Server-Side Rendering (SSR)**: Fetch widget data on the server side of the NextJS app to demonstrate knowledge of SSR.
 
-- **Animate** changes in the state and size of the widget.
+-   **Animate** changes in the state and size of the widget.
 
-- **Theme** : reflect the current browser theme (dark / light) in the widget design.
+-   **Theme** : reflect the current browser theme (dark / light) in the widget design.
 
-- Use **CSS container** media queries.
+-   Use **CSS container** media queries.
 
-- Background color / image of the widget could also reflect the current weather along with displayed icon.
+-   Background color / image of the widget could also reflect the current weather along with displayed icon.
 
 ### Notes
 
-- _Manage your time; this task should not take more than 8 hours of work. If you feel that you are spending too much time on a single part of the task, please move on to the next part and come back to it later._
+-   _Manage your time; this task should not take more than 8 hours of work. If you feel that you are spending too much time on a single part of the task, please move on to the next part and come back to it later._
 
-- _Some of the requirements consist of repeated steps, like creating markup for different sizes of the widget. The developer should demonstrate knowledge of the DRY principle and avoid code duplication. Demonstrating this has more weight than the actual implementation, which can be skipped for the sake of time._
+-   _Some of the requirements consist of repeated steps, like creating markup for different sizes of the widget. The developer should demonstrate knowledge of the DRY principle and avoid code duplication. Demonstrating this has more weight than the actual implementation, which can be skipped for the sake of time._
 
-- _Some REST APIs require precise location coordinates, some require city names, while others need city IDs. The candidate should demonstrate knowledge of working with different types of APIs and clarify the available and needed data to complete the task (even if it requires some additional requests/APIs not described in the initial spec)._
+-   _Some REST APIs require precise location coordinates, some require city names, while others need city IDs. The candidate should demonstrate knowledge of working with different types of APIs and clarify the available and needed data to complete the task (even if it requires some additional requests/APIs not described in the initial spec)._
 
-- _Injecting the widget into the grid of icons requires taking into account not only the cell/column width but also the gaps/spacers between the cells. The widget should adapt to the grid layout and fill the available space._
+-   _Injecting the widget into the grid of icons requires taking into account not only the cell/column width but also the gaps/spacers between the cells. The widget should adapt to the grid layout and fill the available space._
 
 Codebase of the finished application should be pushed to a public repository on GitHub. The repository should contain a README.md file with instructions on how to run the application locally.

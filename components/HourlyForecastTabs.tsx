@@ -49,7 +49,7 @@ export const HourlyForecastTabs: FC<HourlyForecastProps> = ({ layout }) => {
           <SimpleCard
             key={day}
             className={cn(
-              'borderless @3xl:bg-grey-800 @md:m-0 @md:-mx-4 rounded-none border border-none border-gray-800 py-0',
+              'borderless @3xl:bg-grey-800 rounded-none border border-none border-gray-800 py-0 @md:m-0 @md:-mx-4',
               isCardsLayout ? '' : 'px-0',
             )}
           >
@@ -61,13 +61,13 @@ export const HourlyForecastTabs: FC<HourlyForecastProps> = ({ layout }) => {
                     'flex items-center rounded-sm',
                     isCardsLayout
                       ? 'w-full min-w-24 flex-col flex-wrap border border-gray-700/50 bg-gradient-to-t from-gray-950/25 py-2'
-                      : '@md:flex-row @md:flex-nowrap flex-wrap p-2 py-0 odd:bg-white/5',
+                      : 'flex-wrap p-2 py-0 odd:bg-white/5 @md:flex-row @md:flex-nowrap',
                   )}
                 >
                   <DateTime
                     timestamp={hour.dt}
                     format="h A" // 12-hour format
-                    className={cn('@md:text-right mr-2', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
+                    className={cn('mr-2 @md:text-right', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
                   />
                   <p className="basis-[3ch] text-center">
                     <WeatherIcon condition={hour.weather[0]} className={cn('mx-auto', isCardsLayout ? 'size-[50px]' : 'size-[4ch]')} />

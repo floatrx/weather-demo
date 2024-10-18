@@ -39,7 +39,9 @@ export const useWeatherWidget = (): UseWeatherReturnType => {
       const weather = await fetchWeatherDataByCoordinates(coordinates);
       setWeatherData(weather);
       localStorage.setItem('weatherWidget', JSON.stringify(locationInfo));
-    } catch (e) {}
+    } catch (e) {
+      console.log('[updateLocation] Error fetching weather data:', e);
+    }
   };
 
   /**
@@ -67,7 +69,7 @@ export const useWeatherWidget = (): UseWeatherReturnType => {
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        console.log('Load location data from local storage');
+        console.log('[init] Load location data from local storage');
         const storedWeather = localStorage.getItem('weatherWidget');
 
         // Try parse stored LocationInfo
@@ -75,7 +77,7 @@ export const useWeatherWidget = (): UseWeatherReturnType => {
           const locationInfo = JSON.parse(storedWeather);
           const { success, data, error } = LocationInfoSchema.safeParse(locationInfo);
           if (success) {
-            console.log('Local storage is valid:', data);
+            console.log('[init] Local storage is valid:', data);
             await updateLocation(data.cityName, data.coordinates);
             return;
           } else {
