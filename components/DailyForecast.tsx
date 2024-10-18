@@ -16,7 +16,7 @@ interface DailyForecastProps {
 export const DailyForecast: FC<DailyForecastProps> = ({ dailyData, maxDays, dateFormat, layout = 'list' }) => {
   const isCardsLayout = layout === 'cards';
   return (
-    <ul className={cn('', isCardsLayout ? '-mx-4 flex gap-3 overflow-x-auto px-4' : 'w-full space-y-1')}>
+    <ul className={cn('card borderless', isCardsLayout ? '-mx-4 flex gap-3 overflow-x-auto px-4' : '@sm:space-y-1 w-full')}>
       {dailyData.slice(0, maxDays ?? dailyData.length - 1).map((day, index) => (
         <li
           key={index}
@@ -24,8 +24,8 @@ export const DailyForecast: FC<DailyForecastProps> = ({ dailyData, maxDays, date
             'flex-1 px-2 leading-none',
             'rounded-[4px] rounded-sm',
             isCardsLayout
-              ? 'border border-gray-700/50 bg-gradient-to-t from-gray-900 from-gray-900/40 py-4'
-              : 'flex items-center odd:bg-white/5',
+              ? 'border border-gray-700/50 bg-gradient-to-t from-gray-900 from-gray-900/40 py-[15px]'
+              : '@sm:py-0 flex flex-wrap items-center pb-1 odd:bg-white/5',
           )}
         >
           <div className={cn('m-0 flex items-center', isCardsLayout ? 'flex-col justify-center gap-1 p-2' : 'gap-3')}>
@@ -37,7 +37,7 @@ export const DailyForecast: FC<DailyForecastProps> = ({ dailyData, maxDays, date
               <WeatherIcon condition={day.weather[0]} className={cn(isCardsLayout && '-order-1 -my-2 size-[70px]')} />
             </p>
           </div>
-          <p className={cn('text-nowrap opacity-50', isCardsLayout ? 'relative -top-1.5 mt-1 px-2 text-center text-xs' : '')}>
+          <p className={cn('text-nowrap text-xs opacity-50', isCardsLayout ? 'relative -top-1.5 mt-1 px-2 text-center' : '@sm:text-md')}>
             {upperFirst(day.weather[0].description)}
           </p>
         </li>

@@ -30,12 +30,12 @@ export const WeatherView: FC<WeatherViewProps> = ({ weatherData }) => {
       {sizes.map((size, index) => (
         <Card key={index} className={size}>
           <CurrentForecast current={current} title={timezone}>
-            <DailyForecast dailyData={daily} maxDays={3} dateFormat="ddd" />
+            <DailyForecast dailyData={daily} maxDays={3} dateFormat="ddd" layout="list" />
           </CurrentForecast>
         </Card>
       ))}
 
-      <Card className="max-w-[560px]">
+      <Card className="max-w-[520px]">
         <CurrentForecast
           current={current}
           title={timezone}
