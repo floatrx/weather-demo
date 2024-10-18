@@ -6,5 +6,5 @@ export const ThreeDaysForecastCards: RC = () => {
 
   if (!weatherData) return null;
 
-  return <DailyForecastList dailyData={weatherData.daily} maxDays={3} dateFormat="ddd" layout="list" />;
+  return <DailyForecastList maxDays={3} dateFormat="ddd" layout="list" />;
 };
