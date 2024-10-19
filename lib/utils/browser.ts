@@ -5,8 +5,3 @@ export const getCurrentLocaleCode = () => {
   const locale = navigator.language || navigator.language;
   return locale.split('-')[0]; // Extract the language code (e.g., "en" from "en-US")
 };
-
-export const scrollToTop = () => {
-  if (!isBrowser()) return;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};

@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getClientCoordinates } from '@/lib/api/getClientCoordinates';
 
-interface Coordinates {
-  lat: number;
-  lon: number;
-}
+import type { ICoordinates } from '@/types/openWeatherMap';
 
-export const useClientGeoLoc = (): { coordinates: Coordinates | null; loading: boolean } => {
-  const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+/**
+ * Get client coordinates using browser Geolocation API
+ */
+export const useClientGeoLoc = (): { coordinates: ICoordinates | null; loading: boolean } => {
+  const [coordinates, setCoordinates] = useState<ICoordinates | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchCoordinates = useCallback(async () => {
@@ -15,8 +15,8 @@ export const useClientGeoLoc = (): { coordinates: Coordinates | null; loading: b
       const data = await getClientCoordinates();
       setCoordinates(data);
     } catch (error) {
-      console.log('Error fetching coordinates:', error);
       setCoordinates(null);
+      throw error; // pass error to the caller
     } finally {
       setLoading(false);
     }

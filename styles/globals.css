@@ -26,14 +26,31 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-black text-foreground;
+    @apply bg-black text-foreground bg-gradient-to-tr from-gray-700 to-gray-900 bg-fixed;
   }
 }
 
 @layer components {
   .card {
+    position: relative;
+
     &:not(.borderless) {
-      @apply border border-white/10 bg-gradient-to-tl from-gray-800/80 to-gray-950/50;
+      &:before,
+      &:after {
+        @apply content-[''] inset-y-5 absolute;
+        @apply w-[1px] block;
+        /*@apply bg-gradient-to-t from-transparent to-transparent via-gray-500;*/
+      }
+
+      &:before {
+        left: -1px;
+      }
+      &:after {
+        right: -1px;
+      }
+      @apply border border-white/10;
+      /* background */
+      @apply bg-gradient-to-tl from-gray-600/40 to-gray-950/50;
     }
   }
 }

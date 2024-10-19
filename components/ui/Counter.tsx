@@ -1,15 +1,21 @@
-'use client';
-
 import React from 'react';
-import CountUp from 'react-countup';
+import CountUp, { type CountUpProps } from 'react-countup';
 
-export interface CounterProps {
+export interface CounterProps extends Omit<CountUpProps, 'prefix' | 'suffix' | 'end'> {
   value: number | undefined;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   delay?: number;
 }
 
+/**
+ * Animated counter
+ * @param value
+ * @param prefix - e.g. "$"
+ * @param suffix - e.g. "M"
+ * @param rest - compatible CountUp props
+ * @constructor
+ */
 export const Counter = ({ value, prefix, suffix, ...rest }: CounterProps) => {
   if (!value) return null;
 

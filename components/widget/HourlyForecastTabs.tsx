@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
-import { DateTime } from '@/components/DateTime';
-import { DynamicDayName } from '@/components/DynamicDayName';
-import { SimpleCard } from '@/components/SimpleCard';
+import { DateTime } from '@/components/ui/DateTime';
+import { DynamicDayName } from '@/components/ui/DynamicDayName';
+import { SimpleCard } from '@/components/ui/SimpleCard';
 import { SimpleTabs } from '@/components/ui/SimpleTabs';
 import { Temperature } from './Temperature';
-import { WeatherIcon } from '@/components/WeatherIcon';
+import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { cn } from '@/lib/utils/cn';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
@@ -15,7 +15,12 @@ interface HourlyForecastProps {
   layout?: 'cards' | 'list';
 }
 
-export const HourlyForecastTabs: FC<HourlyForecastProps> = ({ layout }) => {
+/**
+ * Display hourly forecast tabs
+ * @param layout
+ * @constructor
+ */
+export const HourlyForecastTabs: RC<HourlyForecastProps> = ({ layout }) => {
   const { weatherData } = useWeatherContext();
 
   if (!weatherData) return null;
@@ -49,7 +54,7 @@ export const HourlyForecastTabs: FC<HourlyForecastProps> = ({ layout }) => {
           <SimpleCard
             key={day}
             className={cn(
-              'borderless @3xl:bg-grey-800 rounded-none border border-none border-gray-800 py-0 @md:m-0 @md:-mx-4',
+              'borderless @3xl:bg-grey-800 @md:m-0 @md:-mx-4 rounded-none border border-none border-gray-800 py-0',
               isCardsLayout ? '' : 'px-0',
             )}
           >
@@ -61,13 +66,13 @@ export const HourlyForecastTabs: FC<HourlyForecastProps> = ({ layout }) => {
                     'flex items-center rounded-sm',
                     isCardsLayout
                       ? 'w-full min-w-24 flex-col flex-wrap border border-gray-700/50 bg-gradient-to-t from-gray-950/25 py-2'
-                      : 'flex-wrap p-2 py-0 odd:bg-white/5 @md:flex-row @md:flex-nowrap',
+                      : '@md:flex-row @md:flex-nowrap flex-wrap p-2 py-0 odd:bg-white/5',
                   )}
                 >
                   <DateTime
                     timestamp={hour.dt}
                     format="h A" // 12-hour format
-                    className={cn('mr-2 @md:text-right', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
+                    className={cn('@md:text-right mr-2', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
                   />
                   <p className="basis-[3ch] text-center">
                     <WeatherIcon condition={hour.weather[0]} className={cn('mx-auto', isCardsLayout ? 'size-[50px]' : 'size-[4ch]')} />

@@ -1,6 +1,6 @@
-import { InfoRow } from '@/components/InfoRow';
-import { Temperature } from '@/components/Temperature';
-import { WeatherIcon } from '@/components/WeatherIcon';
+import { InfoRow } from '@/components/ui/InfoRow';
+import { Temperature } from '@/components/widget/Temperature';
+import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 

@@ -1,15 +1,19 @@
-import { isBrowser } from '@/lib/utils/browser';
+'use client';
 
-export const getClientCoordinates = (): Promise<{ lat: number; lon: number }> => {
+import { isBrowser } from '@/lib/utils/browser';
+import type { ICoordinates } from '@/types/openWeatherMap';
+
+/**
+ * Get client coordinates using browser Geolocation API
+ */
+export const getClientCoordinates = (): Promise<ICoordinates> => {
   if (!isBrowser()) {
     return Promise.reject(new Error('Not available in server-side'));
   }
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      console.log('Geolocation is not supported by your browser');
       reject(new Error('Geolocation is not supported by your browser'));
     } else {
-      console.log('Geolocation is supported by your browser');
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;

@@ -1,12 +1,12 @@
 'use client';
 
 import { Alert } from '@/components/ui/Alert';
-import { CurrentForecast } from '@/components/CurrentForecast';
-import { SimpleCard } from '@/components/SimpleCard';
+import { CurrentForecast } from '@/components/widget/CurrentForecast';
+import { SimpleCard } from '@/components/ui/SimpleCard';
 import { Spinner } from '@/components/ui/Spinner';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
-import { DailyHourlyForecastTabs } from '@/components/DailyHourlyForecastTabs';
-import { ThreeDaysForecastCards } from '@/components/ThreeDaysForecastCards';
+import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecastTabs';
+import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCards';
 
 export const DEMO_SIZES = [180, 300, 350, 400, 420, 460, 520];
 

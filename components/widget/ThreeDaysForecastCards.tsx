@@ -1,6 +1,10 @@
-import { DailyForecastList } from '@/components/DailyForecastList';
+import { DailyForecastList } from '@/components/widget/DailyForecastList';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 
+/**
+ * Display THREE DAYS forecast LIST with SHORT DAY NAMES
+ * @constructor
+ */
 export const ThreeDaysForecastCards: RC = () => {
   const { weatherData } = useWeatherContext();
 

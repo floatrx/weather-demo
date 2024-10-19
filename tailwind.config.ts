@@ -10,9 +10,9 @@ const config: Config = {
         padding: '1rem',
       },
       /**
-       * I found this solution not universal, because best
-       * variant to adaptive elements  using container queries
-       * usecases context knowledges. But this is a good example.
+       * I found this solution not universal because the best
+       * variant for adaptive elements is using container queries
+       * with use case context knowledge. But this is a good example.
        */
       containers: {
         xxs: '10.625rem', // 170px
@@ -71,6 +71,18 @@ const config: Config = {
           '3': 'hsl(var(--chart-3))',
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
+        },
+        gray: {
+          50: '#e0e8f0',
+          100: '#c2d1e1',
+          200: '#a3b9d2',
+          300: '#85a2c3',
+          400: '#668bb4',
+          500: '#4e5e86', // base color
+          600: '#3e4a6a',
+          700: '#2e3650',
+          800: '#1e2236',
+          900: '#0e0f1c',
         },
       },
       borderRadius: {

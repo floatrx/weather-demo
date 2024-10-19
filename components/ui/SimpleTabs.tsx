@@ -19,6 +19,13 @@ interface TabsProps {
   extra?: ReactNode;
 }
 
+/**
+ * Simple tabs to display widget content
+ * @param tabs - { id, title, content }
+ * @param classNames - { buttons, wrapper, content } (optional)
+ * @param extra - Extra content to display after tabs
+ * @constructor
+ */
 export const SimpleTabs = ({ tabs, classNames = {}, extra }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(tabs?.[0]?.id);
 

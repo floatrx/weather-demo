@@ -1,4 +1,4 @@
-import { DateTime } from '@/components/DateTime';
+import { DateTime } from '@/components/ui/DateTime';
 import dayjs from 'dayjs';
 
 interface Props {

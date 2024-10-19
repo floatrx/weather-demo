@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/**
+ * A schema for validating city names.
+ * City names must be at least 3 characters long and contain only alphabetic characters.
+ */
 export const CityNameSchema = z
   .string()
   .min(3, { message: 'City name must be at least 3 characters long' })

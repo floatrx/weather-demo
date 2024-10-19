@@ -1,12 +1,16 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
-import { DailyForecastList } from '@/components/DailyForecastList';
+import { DailyForecastList } from '@/components/widget/DailyForecastList';
 import { Grid, List } from 'lucide-react';
-import { HourlyForecastTabs } from '@/components/HourlyForecastTabs';
+import { HourlyForecastTabs } from '@/components/widget/HourlyForecastTabs';
 import { SimpleTabs } from '@/components/ui/SimpleTabs';
 import { useState } from 'react';
 
+/**
+ * Display daily and hourly forecast tabs
+ * @constructor
+ */
 export const DailyHourlyForecastTabs: RC = () => {
   const [currentLayout, setLayout] = useState<'cards' | 'list'>('cards');
 
