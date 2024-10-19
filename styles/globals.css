@@ -28,10 +28,7 @@ body {
   body {
     @apply bg-background bg-gradient-to-tr bg-fixed text-foreground;
     @apply to-wg-100 from-background;
-
-    .dark & {
-      @apply from-wg-500/50 to-wg-900/50;
-    }
+    @apply dark:from-wg-500/50 dark:to-wg-900/50;
   }
 }
 
@@ -50,9 +47,7 @@ body {
 
     .card-child {
       @apply border-wg-200 from-wg-200 to-wg-100 border bg-gradient-to-t;
-      .dark & {
-        @apply border-wg-900/10 from-wg-600 to-wg-700/50;
-      }
+      @apply dark:border-wg-900/10 dark:from-wg-600 dark:to-wg-700/50;
     }
   }
 }
