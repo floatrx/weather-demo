@@ -39,20 +39,13 @@ body {
   .card {
     &:not(.borderless) {
       @apply rounded-lg p-4;
+      @apply shadow-md shadow-wg-950/5;
+      @apply border border-wg-200;
       /* background */
       @apply bg-gradient-to-tl;
-      @apply shadow-md shadow-wg-950/5;
-      @apply border;
-
-      .light & {
-        @apply border-wg-200;
-        @apply from-wg-100 to-wg-200;
-      }
-
-      .dark & {
-        @apply from-wg-900 to-wg-950;
-        @apply border-black/10;
-      }
+      @apply from-wg-100 to-wg-200;
+      @apply dark:from-wg-900 dark:to-wg-950;
+      @apply dark:border-black/10;
     }
 
     .card-child {
