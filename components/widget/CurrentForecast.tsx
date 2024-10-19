@@ -24,9 +24,8 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
   const [condition] = weatherData.current.weather;
 
   const description = upperFirst(condition.description);
-
   return (
-    <section>
+    <>
       <div className="flex items-center @6xl:gap-4">
         {/* Default info */}
         <div className="flex-1">
@@ -44,7 +43,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
 
           {/* Temperature, Feels Like, Humidity, Wind Speed */}
           <div className="flex flex-col text-center @xs:flex-row @xs:gap-2 @sm:text-left [&_p]:flex-1">
-            <InfoRow label="Temperature" classNames={{ value: 'text-3xl @sm:text-xl' }}>
+            <InfoRow label="Temperature" classNames={{ value: 'text-3xl @xs:text-xl' }}>
               <Temperature value={temp} />
             </InfoRow>
             <InfoRow className="hidden @xs:flex" label="Feels Like">
@@ -65,6 +64,6 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
 
       {/* Pass extra weather widget info to prop explicitly */}
       {extra && <footer>{extra}</footer>}
-    </section>
+    </>
   );
 };

@@ -8,24 +8,24 @@
  */
 .card {
   position: relative;
-}
 
-.card::before {
-  @apply absolute right-1 top-1 z-50 rounded px-1 text-[10px] font-black;
-  @apply max-h-[15px] leading-none text-white/40;
+  &::before {
+    @apply absolute right-1 top-1 z-50 rounded px-1 text-[10px] font-black;
+    @apply max-h-[15px] leading-none text-white/40;
 
-  /* Custom breakpoint labels */
-  @apply content-['xxs'];
-  @apply @xxs:content-['xxs'];
-  @apply @xs:content-['xs'];
-  @apply @sm:content-['sm'];
-  @apply @md:content-['md'];
-  @apply @lg:content-['lg'];
-  @apply @xl:content-['xl'];
-  @apply @2xl:content-['2xl'];
-  @apply @3xl:content-['3xl'];
-  @apply @4xl:content-['4xl'];
-  @apply @5xl:content-['5xl'];
-  @apply @6xl:content-['6xl'];
-  @apply @7xl:content-['7xl'];
+    /* Custom breakpoint labels */
+    @apply content-['xxs'];
+    @apply @xxs:content-['xxs'];
+    @apply @xs:content-['xs'];
+    @apply @sm:content-['sm'];
+    @apply @md:content-['md'];
+    @apply @lg:content-['lg'];
+    @apply @xl:content-['xl'];
+    @apply @2xl:content-['2xl'];
+    @apply @3xl:content-['3xl'];
+    @apply @4xl:content-['4xl'];
+    @apply @5xl:content-['5xl'];
+    @apply @6xl:content-['6xl'];
+    @apply @7xl:content-['7xl'];
+  }
 }
