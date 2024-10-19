@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+
 import { getClientCoordinates } from '@/lib/api/getClientCoordinates';
 
 import type { ICoordinates } from '@/types/openWeatherMap';

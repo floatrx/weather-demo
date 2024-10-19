@@ -12,10 +12,23 @@
         "next/typescript",
         "plugin:tailwindcss/recommended"
     ],
+    "plugins": ["unused-imports", "import", "prettier"],
     "rules": {
         "@typescript-eslint/no-empty-interface": ["off", { "allowSingleExtends": true }],
         "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
         "@typescript-eslint/no-empty-object-type": ["off"],
-        "tailwindcss/no-custom-classname": ["off"]
+        "tailwindcss/no-custom-classname": ["off"],
+        "prettier/prettier": ["error", { "tailwindConfig": "./tailwind.config.ts" }],
+        "import/order": [
+            "error",
+            {
+                "groups": ["builtin", "object", "external", "internal", "parent", "sibling", "type"],
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                }
+            }
+        ]
     }
 }

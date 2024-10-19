@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
-import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 
 /**
  * This form manages the city name only.

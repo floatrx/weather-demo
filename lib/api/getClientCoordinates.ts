@@ -1,6 +1,7 @@
 'use client';
 
 import { isBrowser } from '@/lib/utils/browser';
+
 import type { ICoordinates } from '@/types/openWeatherMap';
 
 /**

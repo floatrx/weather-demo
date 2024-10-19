@@ -1,10 +1,10 @@
 'use client';
 
+import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { Alert } from '@/components/ui/Alert';
-import { CurrentForecast } from '@/components/widget/CurrentForecast';
 import { SimpleCard } from '@/components/ui/SimpleCard';
 import { Spinner } from '@/components/ui/Spinner';
-import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
+import { CurrentForecast } from '@/components/widget/CurrentForecast';
 import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecastTabs';
 import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCards';
 

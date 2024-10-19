@@ -1,5 +1,5 @@
-import { WeatherDemos } from '@/components/WeatherDemos';
 import WeatherForm from '@/components/form/WeatherForm';
+import { WeatherDemos } from '@/components/WeatherDemos';
 
 export default async function Home() {
   return (

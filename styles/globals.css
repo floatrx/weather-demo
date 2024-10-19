@@ -26,7 +26,7 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-black text-foreground bg-gradient-to-tr from-gray-700 to-gray-900 bg-fixed;
+    @apply bg-black bg-gradient-to-tr from-gray-700 to-gray-900 bg-fixed text-foreground;
   }
 }
 

@@ -1,8 +1,9 @@
 /*
   DOC: https://openweathermap.org/weather-conditions#Icon-list
  */
-import { cn } from '@/lib/utils/cn';
 import Image from 'next/image';
+
+import { cn } from '@/lib/utils/cn';
 
 import type { IWeatherCondition } from '@/types/openWeatherMap';
 

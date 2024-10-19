@@ -1,8 +1,8 @@
+import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { InfoRow } from '@/components/ui/InfoRow';
 import { Temperature } from '@/components/widget/Temperature';
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 
 interface CurrentForecastProps {
   extra?: React.ReactNode;
@@ -24,6 +24,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
   const [condition] = weatherData.current.weather;
 
   const description = upperFirst(condition.description);
+
   return (
     <>
       <div className="flex items-center @6xl:gap-4">

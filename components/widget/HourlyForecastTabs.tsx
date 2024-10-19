@@ -1,13 +1,15 @@
 import dayjs from 'dayjs';
+
+import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { DateTime } from '@/components/ui/DateTime';
 import { DynamicDayName } from '@/components/ui/DynamicDayName';
 import { SimpleCard } from '@/components/ui/SimpleCard';
 import { SimpleTabs } from '@/components/ui/SimpleTabs';
-import { Temperature } from './Temperature';
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { cn } from '@/lib/utils/cn';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
+
+import { Temperature } from './Temperature';
 
 import type { IHourlyForecast } from '@/types/openWeatherMap';
 
@@ -53,7 +55,7 @@ export const HourlyForecastTabs: RC<HourlyForecastProps> = ({ layout }) => {
         content: (
           <SimpleCard
             key={day}
-            className={cn('borderless @3xl:bg-grey-800 @md:m-0 @md:-mx-4 min-h-[130px] rounded-none py-0', isCardsLayout ? '' : 'px-0')}
+            className={cn('borderless @3xl:bg-grey-800 min-h-[130px] rounded-none py-0 @md:m-0 @md:-mx-4', isCardsLayout ? '' : 'px-0')}
           >
             <ul className={cn(isCardsLayout ? '-mx-8 flex gap-3 overflow-x-auto px-4' : '')}>
               {hours.map((hour, index) => (
@@ -63,13 +65,13 @@ export const HourlyForecastTabs: RC<HourlyForecastProps> = ({ layout }) => {
                     'flex items-center rounded-sm',
                     isCardsLayout
                       ? 'w-full min-w-24 flex-col flex-wrap border border-gray-700/50 bg-gradient-to-t from-gray-950/25 py-2'
-                      : '@md:flex-row @md:flex-nowrap flex-wrap p-2 py-0 odd:bg-white/5',
+                      : 'flex-wrap p-2 py-0 odd:bg-white/5 @md:flex-row @md:flex-nowrap',
                   )}
                 >
                   <DateTime
                     timestamp={hour.dt}
                     format="h A" // 12-hour format
-                    className={cn('@md:text-right mr-2', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
+                    className={cn('mr-2 @md:text-right', isCardsLayout ? 'text-sm' : 'basis-[5ch]')}
                   />
                   <p className="basis-[3ch] text-center">
                     <WeatherIcon condition={hour.weather[0]} className={cn('mx-auto', isCardsLayout ? 'size-[50px]' : 'size-[4ch]')} />

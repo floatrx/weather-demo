@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, ReactNode } from 'react';
+
 import { useWeatherWidget, type UseWeatherReturnType } from '@/lib/hooks/useWeatherWidget';
 
 export interface WeatherWidgetContextType extends UseWeatherReturnType {}

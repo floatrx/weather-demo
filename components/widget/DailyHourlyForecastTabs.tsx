@@ -1,11 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/Button';
-import { DailyForecastList } from '@/components/widget/DailyForecastList';
 import { Grid, List } from 'lucide-react';
-import { HourlyForecastTabs } from '@/components/widget/HourlyForecastTabs';
-import { SimpleTabs } from '@/components/ui/SimpleTabs';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/Button';
+import { SimpleTabs } from '@/components/ui/SimpleTabs';
+import { DailyForecastList } from '@/components/widget/DailyForecastList';
+import { HourlyForecastTabs } from '@/components/widget/HourlyForecastTabs';
 
 /**
  * Display daily and hourly forecast tabs

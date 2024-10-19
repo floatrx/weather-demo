@@ -1,5 +1,5 @@
-import { convertTemperature } from '@/lib/utils/weather';
 import { Counter } from '@/components/ui/Counter';
+import { convertTemperature } from '@/lib/utils/weather';
 
 interface TemperatureProps extends ComponentProps<'span'> {
   value: number; // temperature in Kelvin (default from API)

@@ -1,6 +1,7 @@
 'use server';
 
 import { API_KEY, OPEN_WEATHER_MAP_API_URL } from '@/config/const';
+
 import type { IWeatherApiResponse, ICoordinates } from '@/types/openWeatherMap';
 
 /**

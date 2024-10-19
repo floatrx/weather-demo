@@ -1,13 +1,14 @@
-import { fetchWeatherDataByCoordinates, fetchCoordinates, getCityNameByCoordinates } from '@/lib/api/openWeatherMap';
+import { useState, useEffect } from 'react';
+
 import { getClientCoordinates } from '@/lib/api/getClientCoordinates';
+import { fetchWeatherDataByCoordinates, fetchCoordinates, getCityNameByCoordinates } from '@/lib/api/openWeatherMap';
 import { getCurrentLocaleCode } from '@/lib/utils/browser';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { useState, useEffect } from 'react';
+import { CityNameSchema } from '@/lib/zod/cityNameSchema';
+import { LocationInfoSchema } from '@/lib/zod/locationInfoSchema';
 
 import type { ICoordinates, IWeatherApiResponse } from '@/types/openWeatherMap';
 import type { LocationInfo } from '@/types/widget';
-import { LocationInfoSchema } from '@/lib/zod/locationInfoSchema';
-import { CityNameSchema } from '@/lib/zod/cityNameSchema';
 
 export interface UseWeatherReturnType {
   location: LocationInfo;
@@ -77,11 +78,11 @@ export const useWeatherWidget = (): UseWeatherReturnType => {
           const locationInfo = JSON.parse(storedWeather);
           const { success, data, error } = LocationInfoSchema.safeParse(locationInfo);
           if (success) {
-            console.log('[init] Local storage is valid:', data);
+            console.log('[init] Local storage data is valid:', data);
             await updateLocation(data.cityName, data.coordinates);
             return;
           } else {
-            console.error('Local storage is invalid:', error.errors);
+            console.error('Local storage data is invalid:', error.errors);
           }
         }
 

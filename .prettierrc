@@ -9,7 +9,7 @@
     "endOfLine": "lf",
     "jsxSingleQuote": false,
     "singleQuote": false,
-    "plugins": [],
+    "plugins": ["prettier-plugin-tailwindcss"],
     "overrides": [
         {
             "files": ["*.{ts,tsx,js,jsx,css}"],

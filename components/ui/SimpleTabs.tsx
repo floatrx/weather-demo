@@ -2,8 +2,8 @@
 
 import { useState, type ReactNode } from 'react';
 
-import { cn } from '@/lib/utils/cn';
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/utils/cn';
 
 interface TabsProps {
   tabs: {

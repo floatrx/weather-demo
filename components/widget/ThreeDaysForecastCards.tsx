@@ -1,5 +1,5 @@
-import { DailyForecastList } from '@/components/widget/DailyForecastList';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
+import { DailyForecastList } from '@/components/widget/DailyForecastList';
 
 /**
  * Display THREE DAYS forecast LIST with SHORT DAY NAMES

@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { CoordinatesSchema } from '@/lib/zod/coordinatesSchema';
+
 import { CityNameSchema } from '@/lib/zod/cityNameSchema';
+import { CoordinatesSchema } from '@/lib/zod/coordinatesSchema';
 
 /**
  * A schema for validating location info.
