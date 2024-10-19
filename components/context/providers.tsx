@@ -1,3 +1,7 @@
+'use client';
+
+import { ThemeProvider } from '@/components/context/ThemeProvider';
+
 import { WeatherWidgetProvider } from './WeatherWidgetContext';
 
 /**
@@ -6,4 +10,8 @@ import { WeatherWidgetProvider } from './WeatherWidgetContext';
  * @param children
  * @constructor
  */
-export const Providers: FC = ({ children }) => <WeatherWidgetProvider>{children}</WeatherWidgetProvider>;
+export const Providers: FC = ({ children }) => (
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <WeatherWidgetProvider>{children}</WeatherWidgetProvider>
+  </ThemeProvider>
+);

@@ -4,7 +4,52 @@
          Update tailwind.config.js to bind the colors to the tw variables.
  */
 :root {
-  --background: 225 63% 6%;
+  --background: 0 0% 98%;
+  --foreground: 217 100% 9%;
+
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 3.9%;
+
+  --popover: 0 0% 98%;
+  --popover-foreground: 0 0% 3.9%;
+
+  --primary: 225 63% 6%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 63.9%;
+  --muted-foreground: 0 0% 14.9%;
+  --accent: 217 70% 96%;
+  --accent-foreground: 0 0% 14.9%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 217 100% 90%;
+  --input: 217 100% 90%;
+  --ring: 215 90% 90%;
+
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+
+  --wg-50: 217 70% 98%;
+  --wg-100: 217 70% 96%;
+  --wg-200: 217 70% 88%;
+  --wg-300: 217 70% 82%;
+  --wg-400: 217 70% 72%;
+  --wg-500: 217 70% 58%;
+  --wg-600: 217 70% 41%;
+  --wg-700: 217 70% 27%;
+  --wg-800: 217 70% 16%;
+  --wg-900: 217 70% 10%;
+  --wg-950: 217 70% 6%;
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 225 68% 11%;
   --foreground: 0 0% 98%;
 
   --card: 0 0% 3.9%;
@@ -13,18 +58,18 @@
   --popover: 0 0% 3.9%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 0 0% 98%;
+  --primary: 20 60% 121%;
   --primary-foreground: 0 0% 9%;
   --secondary: 0 0% 14.9%;
   --secondary-foreground: 0 0% 98%;
   --muted: 0 0% 14.9%;
   --muted-foreground: 0 0% 63.9%;
-  --accent: 0 0% 14.9%;
+  --accent: 217 50% 20%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   --border: 0 0% 14.9%;
-  --input: 0 0% 14.9%;
+  --input: 217 30% 30%;
   --ring: 0 0% 83.1%;
 
   --chart-1: 220 70% 50%;
@@ -33,5 +78,14 @@
   --chart-4: 280 65% 60%;
   --chart-5: 340 75% 55%;
 
-  --radius: 0.8rem;
+  --wg-50: 210 27% 88%;
+  --wg-100: 210 16% 82%;
+  --wg-200: 213 19% 72%;
+  --wg-300: 217 28% 58%;
+  --wg-400: 217 35% 41%;
+  --wg-500: 217 44% 27%;
+  --wg-600: 217 56% 16%;
+  --wg-700: 217 65% 10%;
+  --wg-800: 217 65% 6%;
+  --wg-950: 217 65% 4%;
 }

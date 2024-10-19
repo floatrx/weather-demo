@@ -26,17 +26,40 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-black bg-gradient-to-tr from-gray-700 to-gray-900 bg-fixed text-foreground;
+    @apply bg-background bg-gradient-to-tr bg-fixed text-foreground;
+    @apply to-wg-100 from-background;
+
+    .dark & {
+      @apply from-wg-500/50 to-wg-900/50;
+    }
   }
 }
 
 @layer components {
   .card {
     &:not(.borderless) {
-      @apply border border-white/10;
+      @apply rounded-lg p-4;
       /* background */
-      @apply bg-gradient-to-tl from-gray-600/40 to-gray-950/50;
-      @apply shadow-md;
+      @apply bg-gradient-to-tl;
+      @apply shadow-md shadow-wg-950/5;
+      @apply border;
+
+      .light & {
+        @apply border-wg-200;
+        @apply from-wg-100 to-wg-200;
+      }
+
+      .dark & {
+        @apply from-wg-900 to-wg-950;
+        @apply border-black/10;
+      }
+    }
+
+    .card-child {
+      @apply border-wg-200 from-wg-200 to-wg-100 border bg-gradient-to-t;
+      .dark & {
+        @apply border-wg-900/10 from-wg-600 to-wg-700/50;
+      }
     }
   }
 }
@@ -48,21 +71,4 @@ body {
   .b1 {
     @apply border border-red-500/50;
   }
-}
-
-.react-resizable {
-  position: relative;
-}
-.react-resizable-handle {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  bottom: 0;
-  right: 0;
-  padding: 0 3px 3px 0;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg08IS0tIEdlbmVyYXRvcjogQWRvYmUgRmlyZXdvcmtzIENTNiwgRXhwb3J0IFNWRyBFeHRlbnNpb24gYnkgQWFyb24gQmVhbGwgKGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSkgLiBWZXJzaW9uOiAwLjYuMSAgLS0+DTwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DTxzdmcgaWQ9IlVudGl0bGVkLVBhZ2UlMjAxIiB2aWV3Qm94PSIwIDAgNiA2IiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHZlcnNpb249IjEuMSINCXhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiDQl4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjZweCIgaGVpZ2h0PSI2cHgiDT4NCTxnIG9wYWNpdHk9IjAuMzAyIj4NCQk8cGF0aCBkPSJNIDYgNiBMIDAgNiBMIDAgNC4yIEwgNCA0LjIgTCA0LjIgNC4yIEwgNC4yIDAgTCA2IDAgTCA2IDYgTCA2IDYgWiIgZmlsbD0iIzAwMDAwMCIvPg0JPC9nPg08L3N2Zz4=')
-    no-repeat bottom right;
-  background-origin: content-box;
-  box-sizing: border-box;
-  cursor: se-resize;
 }
