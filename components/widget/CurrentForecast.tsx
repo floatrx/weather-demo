@@ -33,7 +33,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
           <header className="flex flex-col items-center justify-between @sm:flex-row">
             <div className="group max-w-full flex-1 text-center @sm:text-left">
               <h2 className="flex flex-1 items-center text-transparent">
-                <span className="bg-gradient-to-r from-[#9abc26] to-[#fe955e] bg-clip-text text-2xl font-black leading-none">
+                <span className="to-wg-700 from-wg-600 bg-gradient-to-r bg-clip-text text-2xl font-black leading-none dark:from-[#9abc26] dark:to-[#fe955e]">
                   {location.cityName}
                 </span>
               </h2>

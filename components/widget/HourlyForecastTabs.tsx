@@ -55,16 +55,19 @@ export const HourlyForecastTabs: RC<HourlyForecastProps> = ({ layout }) => {
         content: (
           <SimpleCard
             key={day}
-            className={cn('borderless @3xl:bg-grey-800 min-h-[130px] rounded-none py-0 @md:m-0 @md:-mx-4', isCardsLayout ? '' : 'px-0')}
+            className={cn(
+              'borderless @3xl:bg-grey-800 min-h-[130px] max-w-xl rounded-none py-0 @md:m-0 @md:-mx-4',
+              isCardsLayout ? '' : 'px-0',
+            )}
           >
-            <ul className={cn(isCardsLayout ? '-mx-8 flex gap-3 overflow-x-auto px-4' : '')}>
+            <ul className={cn(isCardsLayout ? 'flex gap-3 overflow-x-auto px-4' : '')}>
               {hours.map((hour, index) => (
                 <li
                   key={index}
                   className={cn(
                     'flex items-center rounded-sm',
                     isCardsLayout
-                      ? 'w-full min-w-24 flex-col flex-wrap border border-gray-700/50 bg-gradient-to-t from-gray-950/25 py-2'
+                      ? 'card-child w-full min-w-24 flex-col flex-wrap py-2'
                       : 'flex-wrap p-2 py-0 odd:bg-white/5 @md:flex-row @md:flex-nowrap',
                   )}
                 >

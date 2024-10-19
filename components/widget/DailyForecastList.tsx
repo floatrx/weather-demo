@@ -36,9 +36,7 @@ export const DailyForecastList: FC<DailyForecastProps> = ({ maxDays, dateFormat,
           className={cn(
             'flex-1 px-2 leading-none',
             'rounded-[4px] rounded-sm',
-            isCardsLayout
-              ? 'border border-gray-700/50 bg-gradient-to-t from-gray-900 from-gray-900/40 py-[15px]'
-              : 'flex flex-wrap items-center pb-1 odd:bg-white/5 @sm:py-0',
+            isCardsLayout ? 'card-child py-[15px]' : 'flex flex-wrap items-center pb-1 odd:bg-white/5 @sm:py-0',
           )}
         >
           <div

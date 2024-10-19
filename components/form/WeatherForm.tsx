@@ -23,7 +23,7 @@ const WeatherForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex max-w-md gap-2">
       <Input
-        className="max-w-[200px] bg-gray-900"
+        className="max-w-[200px]"
         type="text"
         value={cityName}
         onChange={(e) => setCityName(e.target.value)}
