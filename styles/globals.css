@@ -32,25 +32,11 @@ body {
 
 @layer components {
   .card {
-    position: relative;
-
     &:not(.borderless) {
-      &:before,
-      &:after {
-        @apply content-[''] inset-y-5 absolute;
-        @apply w-[1px] block;
-        /*@apply bg-gradient-to-t from-transparent to-transparent via-gray-500;*/
-      }
-
-      &:before {
-        left: -1px;
-      }
-      &:after {
-        right: -1px;
-      }
       @apply border border-white/10;
       /* background */
       @apply bg-gradient-to-tl from-gray-600/40 to-gray-950/50;
+      @apply shadow-md;
     }
   }
 }
