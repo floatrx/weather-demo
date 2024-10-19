@@ -41,8 +41,10 @@ export const SimpleTabs = ({ tabs, classNames = {}, extra }: TabsProps) => {
               size="xs"
               variant="ghost"
               className={cn(
-                'rounded-md border duration-100 ease-out hover:bg-wg-50/90 transition-all',
-                activeTab === id ? 'dark:border-wg-100 border-wg-300/80 bg-wg-50/50 dark:bg-wg-900' : 'border-wg-200  dark:border-wg-600',
+                'rounded-md border duration-100 ease-out transition-all hover:bg-transparent',
+                activeTab === id
+                  ? 'dark:border-wg-500/90 border-wg-300/80 bg-wg-50/50 dark:bg-wg-900'
+                  : 'border-wg-200  dark:border-wg-600',
               )}
               onClick={() => setActiveTab(id)}
             >
