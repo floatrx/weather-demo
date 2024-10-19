@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project demonstrating the use of the [OpenWeatherMap API](https://openweathermap.org/api) to display the current weather in a city.
+Weather widget adaptively changes its appearance based on the parent container's width.
+
+# Tech Stack
+1. Next.js 14
+2. TypeScript
+3. ShadCN
+4. Tailwind CSS with container-queries plugin
+5. OpenWeatherMap API
+
+### Live demo https://weather.floatrx.net/
+
+![Screenshot](public/screenshot.png)
 
 ## Getting Started
 
