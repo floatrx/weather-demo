@@ -5,7 +5,11 @@ import { Providers } from '@/components/context/providers';
 import { API_KEY } from '@/config/const';
 
 import type { Metadata } from 'next';
+
 import '../styles/globals.css';
+import { NavLink } from '@/components/ui/NavLink';
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -35,15 +39,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
-        <Providers>{children}</Providers>
-        <footer className="container pb-4 text-sm">
-          <p className="max-w-xl">
-            &copy; Floatrx 2024 | Weather demo app. Nextjs14 + ShadCN + TailwindCSS (@container queries) + OpenWeatherMap API Source code:
-            <Link className="px-2 underline" href="https://github.com/floatrx/weather-demo" rel="noopener" target="_blank">
-              Weather-demo
-            </Link>
-          </p>
-        </footer>
+        <Providers>
+          <Header />
+          <main className="container mx-auto min-h-screen space-y-4">{children}</main>
+        </Providers>
+        <Footer />
       </body>
     </html>
   );

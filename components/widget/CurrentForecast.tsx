@@ -7,6 +7,7 @@ import { upperFirst } from '@/lib/utils/upperFirst';
 interface CurrentForecastProps {
   extra?: React.ReactNode;
   aside?: React.ReactNode;
+  initial?: boolean;
 }
 
 /**
@@ -15,7 +16,7 @@ interface CurrentForecastProps {
  * @param extra - extra widget details
  * @constructor
  */
-export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
+export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra, initial }) => {
   const { location, weatherData } = useWeatherContext(); // get location from context / city name
 
   if (!weatherData) return null;
@@ -24,6 +25,15 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra }) => {
   const [condition] = weatherData.current.weather;
 
   const description = upperFirst(condition.description);
+
+  if (initial) {
+    return (
+      <div className="relative">
+        <WeatherIcon condition={condition} className="size-[80px] mx-auto" />
+        <Temperature className="absolute bottom-1 right-1 bg-background/50 backdrop-blur-sm px-1 font-black rounded" value={temp} />
+      </div>
+    );
+  }
 
   return (
     <>

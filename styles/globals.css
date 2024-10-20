@@ -35,7 +35,7 @@ body {
 @layer components {
   .card {
     &:not(.borderless) {
-      @apply rounded-lg p-4;
+      @apply rounded-lg;
       @apply shadow-md shadow-wg-950/5;
       @apply border border-wg-200;
       /* background */

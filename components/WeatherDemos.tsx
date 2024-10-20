@@ -30,7 +30,7 @@ export const WeatherDemos: RC = () => {
         to demonstrate @container query cases
       */}
       {DEMO_SIZES.map((maxWidth, index) => (
-        <SimpleCard key={index} style={{ maxWidth, animationDelay: index / 8 + 's' }}>
+        <SimpleCard key={index} className="animate-show" style={{ maxWidth, animationDelay: index / 8 + 's' }}>
           <CurrentForecast aside={<ThreeDaysForecastCards />} />
         </SimpleCard>
       ))}
