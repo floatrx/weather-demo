@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils/cn';
 export interface DraggableWidgetProps {
   size: DropZoneSize;
   onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void | boolean;
+  drag?: boolean;
 }
 
 /**
@@ -17,7 +18,7 @@ export interface DraggableWidgetProps {
  * @param children - contend
  * @constructor
  */
-export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragEnd, children }) => {
+export const DraggableWidget: FC<DraggableWidgetProps> = ({ drag, size, onDragEnd, children }) => {
   const controls = useAnimationControls();
 
   return (
@@ -26,9 +27,9 @@ export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragEnd, chi
         layout
         animate={controls}
         layoutId="widget"
-        className={cn('cursor-move max-w-full', sizeStyles[size])}
+        className={cn('max-w-full', drag && 'cursor-move active:cursor-grabbing', sizeStyles[size])}
         whileDrag={{ scale: 0.9 }}
-        drag
+        drag={drag}
         dragElastic={false}
         onDragEnd={(e, panInfo) => {
           onDragEnd(e, panInfo);

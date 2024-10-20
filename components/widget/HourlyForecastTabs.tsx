@@ -60,7 +60,7 @@ export const HourlyForecastTabs: RC<HourlyForecastProps> = ({ layout }) => {
               isCardsLayout ? '' : 'px-0',
             )}
           >
-            <ul className={cn(isCardsLayout ? 'flex gap-3 -mx-4 overflow-x-auto px-4' : '')}>
+            <ul className={cn(isCardsLayout ? 'flex gap-3 -mx-4 overflow-x-auto px-4' : 'mx-2')}>
               {hours.map((hour, index) => (
                 <li
                   key={index}
