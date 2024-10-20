@@ -26,14 +26,14 @@ export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragEnd, chi
         layout
         animate={controls}
         layoutId="widget"
-        className={cn('cursor-move overflow-hidden', sizeStyles[size])}
+        className={cn('cursor-move max-w-full', sizeStyles[size])}
         whileDrag={{ scale: 0.9 }}
         drag
         dragElastic={false}
         onDragEnd={(e, panInfo) => {
-          if (onDragEnd(e, panInfo)) return;
+          onDragEnd(e, panInfo);
           // Little hack to return widget to the initial position
-          controls.start({ scale: 1, x: 0, y: 0 });
+          controls.start({ scale: 1, x: 0, y: 0 }).then();
         }}
       >
         {children}
