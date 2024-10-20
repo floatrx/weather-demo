@@ -36,20 +36,18 @@ export default function Page() {
     );
   };
 
+  const dropZoneSizes: DropZoneSize[] = ['2x2', '4x2', '4x4'];
+
   return (
     <>
       <h1 className="text-2xl font-black">Drag and Drop Widgets</h1>
       {!dropZone && <WeatherWidget />}
       <div className="flex flex-col gap-5 mt-4">
-        <WidgetsDropZone size="2x2" onDrop={handleDrop}>
-          {dropZone === '2x2' && <WeatherWidget />}
-        </WidgetsDropZone>
-        <WidgetsDropZone size="4x2" onDrop={handleDrop}>
-          {dropZone === '4x2' && <WeatherWidget />}
-        </WidgetsDropZone>
-        <WidgetsDropZone size="4x4" onDrop={handleDrop}>
-          {dropZone === '4x4' && <WeatherWidget />}
-        </WidgetsDropZone>
+        {dropZoneSizes.map((size) => (
+          <WidgetsDropZone key={size} size={size} onDrop={handleDrop}>
+            {dropZone === size && <WeatherWidget />}
+          </WidgetsDropZone>
+        ))}
       </div>
     </>
   );
