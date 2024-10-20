@@ -13,9 +13,9 @@ interface WidgetsDropZoneProps {
 }
 
 export const sizeStyles: Record<DropZoneSize, string> = {
-  '2x2': 'w-[180px] h-[160px]',
-  '4x2': 'w-[520px] h-[178px]',
-  '4x4': 'w-[520px] h-[372px]',
+  '2x2': 'w-[190px] h-[190px]',
+  '4x2': 'w-[560px] h-[190px]',
+  '4x4': 'w-[560px] h-[370px]',
   '1x1': 'w-[80px] h-[80px]',
 };
 

@@ -5,8 +5,6 @@ import { Alert } from '@/components/ui/Alert';
 import { SimpleCard } from '@/components/ui/SimpleCard';
 import { Spinner } from '@/components/ui/Spinner';
 import { CurrentForecast } from '@/components/widget/CurrentForecast';
-import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecastTabs';
-import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCards';
 
 export const DEMO_SIZES = [180, 300, 350, 400, 420, 460, 520];
 
@@ -31,7 +29,7 @@ export const WeatherDemos: RC = () => {
       */}
       {DEMO_SIZES.map((maxWidth, index) => (
         <SimpleCard key={index} className="animate-show" style={{ maxWidth, animationDelay: index / 8 + 's' }}>
-          <CurrentForecast aside={<ThreeDaysForecastCards />} />
+          <CurrentForecast />
         </SimpleCard>
       ))}
 
@@ -41,7 +39,7 @@ export const WeatherDemos: RC = () => {
         so we need to pass more weather details in extra prop
       */}
       <SimpleCard className="max-h-[500px] max-w-[520px]">
-        <CurrentForecast extra={<DailyHourlyForecastTabs />} />
+        <CurrentForecast extended />
       </SimpleCard>
     </>
   );

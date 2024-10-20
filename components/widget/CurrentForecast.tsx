@@ -1,22 +1,25 @@
+import React from 'react';
+
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { InfoRow } from '@/components/ui/InfoRow';
+import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecastTabs';
 import { Temperature } from '@/components/widget/Temperature';
+import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCards';
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
 interface CurrentForecastProps {
-  extra?: React.ReactNode;
-  aside?: React.ReactNode;
+  extended?: boolean;
   initial?: boolean;
 }
 
 /**
  * Current weather forecast widget (main)
- * @param aside - aside content
- * @param extra - extra widget details
+ * @param extra - extra widget details (for extended view)
+ * @param extended - render only initial widget info (icon, temperature)
  * @constructor
  */
-export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra, initial }) => {
+export const CurrentForecast: RC<CurrentForecastProps> = ({ extended, initial }) => {
   const { location, weatherData } = useWeatherContext(); // get location from context / city name
 
   if (!weatherData) return null;
@@ -69,12 +72,20 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ aside, extra, initia
           </div>
         </div>
 
-        {/* Visible only for wide parent @container */}
-        {aside && <aside className="hidden items-center border-l border-gray-700/30 pl-2 @container @6xl:flex @6xl:flex-1">{aside}</aside>}
+        {/* Visible only for wide parent @container if extended info not enabled */}
+        {!extended && (
+          <aside className="hidden items-center border-l border-gray-700/30 pl-2 @container @6xl:flex @6xl:flex-1">
+            <ThreeDaysForecastCards />
+          </aside>
+        )}
       </div>
 
-      {/* Pass extra weather widget info to prop explicitly */}
-      {extra && <footer>{extra}</footer>}
+      {/* Pass extra weather widget */}
+      {extended && (
+        <footer>
+          <DailyHourlyForecastTabs />
+        </footer>
+      )}
     </>
   );
 };

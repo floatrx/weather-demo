@@ -2,23 +2,22 @@
 
 import React, { useState } from 'react';
 
-import { Widget, type WidgetProps } from '@/components/dragndrop/Widget';
+import { DraggableWidget, type DraggableWidgetProps } from '@/components/dragndrop/DraggableWidget';
 import { WidgetsDropZone, type DropZoneSize } from '@/components/dragndrop/WidgetsDropZone';
 import { SimpleCard } from '@/components/ui/SimpleCard';
 import { CurrentForecast } from '@/components/widget/CurrentForecast';
-import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecastTabs';
 import { cn } from '@/lib/utils/cn';
 
 export default function Page() {
   const [currentSize, setCurrentSize] = useState<DropZoneSize>('1x1');
   const [dropZone, setDropZone] = useState<DropZoneSize | null>(null);
-  const initial = currentSize === '1x1';
 
-  const handleDragStart: WidgetProps['onDragStart'] = (e) => {
+  const initial = currentSize === '1x1';
+  const dropZoneSizes: DropZoneSize[] = ['2x2', '4x2', '4x4']; // to render drop zones
+
+  const handleDragStart: DraggableWidgetProps['onDragStart'] = (e) => {
     if ('dataTransfer' in e) return;
-    if ('dataTransfer' in e) {
-      (e as DragEvent).dataTransfer!.setData('text/plain', 'widget');
-    }
+    (e as DragEvent).dataTransfer!.setData('text/plain', 'widget');
   };
 
   const handleDrop = (size: DropZoneSize) => {
@@ -28,15 +27,13 @@ export default function Page() {
 
   const WeatherWidget = () => {
     return (
-      <Widget size={currentSize} onDragStart={handleDragStart}>
-        <SimpleCard className={cn('max-h-[500px] max-w-[520px]', initial && 'p-0 min-w-fit min-h-fit')}>
-          <CurrentForecast initial={initial} extra={currentSize === '4x4' && <DailyHourlyForecastTabs />} />
+      <DraggableWidget size={currentSize} onDragStart={handleDragStart}>
+        <SimpleCard className={cn('', initial && 'p-0 min-w-fit min-h-fit')}>
+          <CurrentForecast initial={initial} extended={currentSize === '4x4'} />
         </SimpleCard>
-      </Widget>
+      </DraggableWidget>
     );
   };
-
-  const dropZoneSizes: DropZoneSize[] = ['2x2', '4x2', '4x4'];
 
   return (
     <>

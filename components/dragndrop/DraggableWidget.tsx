@@ -5,12 +5,19 @@ import { motion, type PanInfo } from 'framer-motion';
 import { sizeStyles, type DropZoneSize } from '@/components/dragndrop/WidgetsDropZone';
 import { cn } from '@/lib/utils/cn';
 
-export interface WidgetProps {
+export interface DraggableWidgetProps {
   size: DropZoneSize;
   onDragStart: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
 }
 
-export const Widget: FC<WidgetProps> = ({ size, onDragStart, children }) => {
+/**
+ * Draggable widget component wrapped with framer-motion
+ * @param size - size of the widget (1x1, 2x2, 4x2, 4x4)
+ * @param onDragStart
+ * @param children - contend
+ * @constructor
+ */
+export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragStart, children }) => {
   return (
     <motion.div
       layout

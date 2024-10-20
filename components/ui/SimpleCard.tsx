@@ -16,7 +16,7 @@ interface CardProps extends ComponentProps<'section'> {
  * @constructor
  */
 export const SimpleCard: FC<CardProps> = ({ children, className, title, ...props }) => (
-  <section className={cn(`card min-w-[170px] max-w-lg flex-1 select-none @container min-h-[158px] p-4`, className)} {...props}>
+  <section className={cn(`card min-w-[170px] max-w-[590px] flex-1 select-none @container min-h-[160px] p-4`, className)} {...props}>
     {title && (
       <div>
         <h2 className="mb-2 flex items-center gap-2 text-xl font-semibold">{title}</h2>

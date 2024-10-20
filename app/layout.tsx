@@ -1,15 +1,13 @@
 import localFont from 'next/font/local';
-import Link from 'next/link';
 
 import { Providers } from '@/components/context/providers';
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 import { API_KEY } from '@/config/const';
 
 import type { Metadata } from 'next';
 
 import '../styles/globals.css';
-import { NavLink } from '@/components/ui/NavLink';
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
