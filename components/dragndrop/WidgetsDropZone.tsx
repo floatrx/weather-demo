@@ -25,6 +25,10 @@ export const WidgetsDropZone: React.FC<WidgetsDropZoneProps> = ({ size, onDrop, 
     onDrop(size);
   };
 
+  const handleClick = () => {
+    onDrop(size);
+  };
+
   return (
     <div
       className={cn(
@@ -33,6 +37,7 @@ export const WidgetsDropZone: React.FC<WidgetsDropZoneProps> = ({ size, onDrop, 
       )}
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
+      onClick={handleClick}
     >
       {children || `(${size})`}
     </div>
