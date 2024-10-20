@@ -8,8 +8,7 @@ export type DropZoneSize = '2x2' | '4x2' | '4x4' | '1x1';
 
 interface WidgetsDropZoneProps {
   size: DropZoneSize;
-  onDrop: (size: DropZoneSize) => void;
-  children?: React.ReactNode;
+  onClick?: (size: DropZoneSize) => void;
 }
 
 export const sizeStyles: Record<DropZoneSize, string> = {
@@ -19,25 +18,23 @@ export const sizeStyles: Record<DropZoneSize, string> = {
   '1x1': 'w-[80px] h-[80px]',
 };
 
-export const WidgetsDropZone: React.FC<WidgetsDropZoneProps> = ({ size, onDrop, children }) => {
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    onDrop(size);
-  };
-
-  const handleClick = () => {
-    onDrop(size);
-  };
-
+/**
+ * Widgets drop zone - used for drag and drop
+ * On widget drag end, it will try to find the drop zone in the document and place the widget there
+ * @param size - drop zone size
+ * @param onClick - callback when drop zone is clicked (optional)
+ * @param children - widget content
+ * @constructor
+ */
+export const WidgetsDropZone: FC<WidgetsDropZoneProps> = ({ size, onClick, children }) => {
   return (
     <div
+      id={size} // required for drag and drop (framer-motion) -> used for find drop zone via document.getElementById
       className={cn(
         `flex rounded items-center justify-center max-w-full ${sizeStyles[size]}`,
         !children && 'border-2 border-dashed border-gray-400/30',
       )}
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={handleDrop}
-      onClick={handleClick}
+      onClick={() => onClick?.(size)}
     >
       {children || `(${size})`}
     </div>

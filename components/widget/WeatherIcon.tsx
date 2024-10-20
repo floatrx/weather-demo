@@ -28,6 +28,7 @@ export const WeatherIcon: FC<WeatherIconProps> = ({ condition, className }) => {
   return (
     <Image
       src={getIconUrl(condition.icon)}
+      priority
       alt={condition.description}
       className={cn('pointer-events-none h-8 max-h-[100px] w-8 max-w-[100px]', className)}
       width={100}

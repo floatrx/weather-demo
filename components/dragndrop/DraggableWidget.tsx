@@ -1,13 +1,13 @@
 'use client';
 
-import { motion, type PanInfo } from 'framer-motion';
+import { motion, type PanInfo, useAnimationControls } from 'framer-motion';
 
 import { sizeStyles, type DropZoneSize } from '@/components/dragndrop/WidgetsDropZone';
 import { cn } from '@/lib/utils/cn';
 
 export interface DraggableWidgetProps {
   size: DropZoneSize;
-  onDragStart: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
+  onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void | boolean;
 }
 
 /**
@@ -17,17 +17,27 @@ export interface DraggableWidgetProps {
  * @param children - contend
  * @constructor
  */
-export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragStart, children }) => {
+export const DraggableWidget: FC<DraggableWidgetProps> = ({ size, onDragEnd, children }) => {
+  const controls = useAnimationControls();
+
   return (
-    <motion.div
-      layout
-      layoutId="widget"
-      className={cn('cursor-move overflow-hidden active:scale-95', sizeStyles[size])}
-      whileDrag={{ scale: 0.5 }}
-      draggable
-      onDragStart={onDragStart}
-    >
-      {children}
-    </motion.div>
+    <div className="relative size-full">
+      <motion.div
+        layout
+        animate={controls}
+        layoutId="widget"
+        className={cn('cursor-move overflow-hidden', sizeStyles[size])}
+        whileDrag={{ scale: 0.9 }}
+        drag
+        dragElastic={false}
+        onDragEnd={(e, panInfo) => {
+          if (onDragEnd(e, panInfo)) return;
+          // Little hack to return widget to the initial position
+          controls.start({ scale: 1, x: 0, y: 0 });
+        }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 };
