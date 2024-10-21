@@ -39,6 +39,7 @@ export const DraggableWidgetDemo: FC = () => {
 
   return (
     <>
+      {/* Toggle drag feature */}
       <Button
         className="fixed right-2 top-2"
         size="icon"
@@ -48,8 +49,11 @@ export const DraggableWidgetDemo: FC = () => {
       >
         {canDrag ? <Unlock /> : <Lock />}
       </Button>
-      {JSON.stringify({ dropZone })}
+
+      {/* Initial widget as icon */}
       {!dropZone && <DraggableWeatherWidget size="1x1" {...draggableWidgetProps} />}
+
+      {/* Render DropZones */}
       <div className="flex flex-col gap-5 mt-4">
         {dropZoneSizes.map((size) => (
           <WidgetsDropZone key={size} size={size} onClick={moveToDropZone}>
