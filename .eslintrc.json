@@ -19,6 +19,7 @@
         "tailwindcss/no-custom-classname": ["off"],
         "tailwindcss/classnames-order": ["off"],
         "prettier/prettier": ["error", { "tailwindConfig": "./tailwind.config.ts" }],
+        "react/display-name": ["off"],
         "import/order": [
             "error",
             {

@@ -1,13 +1,14 @@
 'use client';
 
 import { motion, type PanInfo, useAnimationControls } from 'framer-motion';
+import { memo } from 'react';
 
 import { sizeStyles, type DropZoneSize } from '@/components/dragndrop/WidgetsDropZone';
 import { cn } from '@/lib/utils/cn';
 
 export interface DraggableWidgetProps {
   size: DropZoneSize;
-  onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void | boolean;
+  onDragEnd: (info: PanInfo) => void | boolean;
   drag?: boolean;
 }
 
@@ -18,8 +19,10 @@ export interface DraggableWidgetProps {
  * @param children - contend
  * @constructor
  */
-export const DraggableWidget: FC<DraggableWidgetProps> = ({ drag, size, onDragEnd, children }) => {
+export const DraggableWidget: FC<DraggableWidgetProps> = memo(({ drag, size, onDragEnd, children }) => {
   const controls = useAnimationControls();
+
+  console.log('render DraggableWidget');
 
   return (
     <div className="relative size-full">
@@ -31,8 +34,8 @@ export const DraggableWidget: FC<DraggableWidgetProps> = ({ drag, size, onDragEn
         whileDrag={{ scale: 0.9 }}
         drag={drag}
         dragElastic={false}
-        onDragEnd={(e, panInfo) => {
-          onDragEnd(e, panInfo);
+        onDragEnd={(_event, panInfo) => {
+          onDragEnd(panInfo);
           // Little hack to return widget to the initial position
           controls.start({ scale: 1, x: 0, y: 0 }).then();
         }}
@@ -41,4 +44,4 @@ export const DraggableWidget: FC<DraggableWidgetProps> = ({ drag, size, onDragEn
       </motion.div>
     </div>
   );
-};
+});

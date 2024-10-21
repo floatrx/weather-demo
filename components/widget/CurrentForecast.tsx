@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { InfoRow } from '@/components/ui/InfoRow';
@@ -19,7 +19,7 @@ interface CurrentForecastProps {
  * @param extended - render only initial widget info (icon, temperature)
  * @constructor
  */
-export const CurrentForecast: RC<CurrentForecastProps> = ({ extended, initial }) => {
+export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initial }) => {
   const { location, weatherData } = useWeatherContext(); // get location from context / city name
 
   if (!weatherData) return null;
@@ -28,6 +28,8 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ extended, initial })
   const [condition] = weatherData.current.weather;
 
   const description = upperFirst(condition.description);
+
+  console.log('render CurrentForecast');
 
   if (initial) {
     return (
@@ -88,4 +90,4 @@ export const CurrentForecast: RC<CurrentForecastProps> = ({ extended, initial })
       )}
     </>
   );
-};
+});

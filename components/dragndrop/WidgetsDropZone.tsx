@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 
 import { cn } from '@/lib/utils/cn';
 
@@ -26,7 +26,7 @@ export const sizeStyles: Record<DropZoneSize, string> = {
  * @param children - widget content
  * @constructor
  */
-export const WidgetsDropZone: FC<WidgetsDropZoneProps> = ({ size, onClick, children }) => {
+export const WidgetsDropZone: FC<WidgetsDropZoneProps> = memo(({ size, onClick, children }) => {
   return (
     <div
       id={size} // required for drag and drop (framer-motion) -> used for find drop zone via document.getElementById
@@ -39,4 +39,4 @@ export const WidgetsDropZone: FC<WidgetsDropZoneProps> = ({ size, onClick, child
       {children || `(${size})`}
     </div>
   );
-};
+});
