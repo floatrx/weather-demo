@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { DraggableWidgetDemo } from '@/components/DraggableWidgetDemo';
+import { Heading } from '@/components/ui/Heading';
 
 export default function Page() {
   return (
     <>
-      <h1 className="text-2xl font-black">Drag and Drop Widgets</h1>
+      <Heading>Drag and Drop Widgets</Heading>
       <DraggableWidgetDemo />
     </>
   );
