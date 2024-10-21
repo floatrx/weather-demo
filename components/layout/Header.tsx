@@ -5,7 +5,7 @@ import { NavLink } from '@/components/ui/NavLink';
 const ToggleTheme = dynamic(() => import('@/components/ToggleTheme'), { ssr: false });
 
 export const Header: RC = () => (
-  <header className="container py-4">
+  <header className="container py-4 min-h-[62px]">
     <nav>
       <ul className="flex gap-3 text-lg">
         <li>
