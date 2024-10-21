@@ -8,7 +8,7 @@ import type { IWeatherApiResponse, ICoordinates } from '@/types/openWeatherMap';
  * Fetch coordinates from OpenWeatherMap API
  * @param city
  */
-export const fetchCoordinates = async (city: string): Promise<ICoordinates> => {
+export const getCoordinatesByCityName = async (city: string): Promise<ICoordinates> => {
   const response = await fetch(`${OPEN_WEATHER_MAP_API_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
   const data = await response.json();
   if (!data.length) {
@@ -19,8 +19,6 @@ export const fetchCoordinates = async (city: string): Promise<ICoordinates> => {
 
 /**
  * Fetch city name by coordinates from OpenWeatherMap API
- * @param {lat, lon} - Latitude and Longitude coordinates
- * @param loc - Location key (e.g. 'en', 'uk') -> get from browser (client side)
  */
 export const getCityNameByCoordinates = async ({ lat, lon }: ICoordinates, loc: string): Promise<string> => {
   const response = await fetch(`${OPEN_WEATHER_MAP_API_URL}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`);
@@ -35,8 +33,6 @@ export const getCityNameByCoordinates = async ({ lat, lon }: ICoordinates, loc: 
 
 /**
  * Fetch weather data from OpenWeatherMap API
- * @param lat
- * @param lon
  */
 export const fetchWeatherDataByCoordinates = async ({ lat, lon }: ICoordinates): Promise<IWeatherApiResponse> => {
   try {
@@ -46,4 +42,12 @@ export const fetchWeatherDataByCoordinates = async ({ lat, lon }: ICoordinates):
     console.error('Error fetching weather data:', error);
     throw error;
   }
+};
+
+/**
+ * Fetch weather data by city name
+ */
+export const fetchWeatherByCityName = async (city: string): Promise<IWeatherApiResponse> => {
+  const coordinates = await getCoordinatesByCityName(city);
+  return fetchWeatherDataByCoordinates(coordinates);
 };

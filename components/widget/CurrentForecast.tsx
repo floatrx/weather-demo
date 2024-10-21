@@ -1,3 +1,5 @@
+'use client';
+
 import React, { memo } from 'react';
 
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
@@ -8,9 +10,12 @@ import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCar
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
+import type { IWeatherApiResponse } from '@/types/openWeatherMap';
+
 interface CurrentForecastProps {
   extended?: boolean;
-  initial?: boolean;
+  initial?: boolean; // widget initial view 1x1 (icon, temperature)
+  defaultWeatherData?: IWeatherApiResponse; // SSR
 }
 
 /**
@@ -19,8 +24,11 @@ interface CurrentForecastProps {
  * @param extended - render only initial widget info (icon, temperature)
  * @constructor
  */
-export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initial }) => {
-  const { location, weatherData } = useWeatherContext(); // get location from context / city name
+export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, defaultWeatherData, initial }) => {
+  const { location, weatherData: fetchedWeather } = useWeatherContext(); // get location from context / city name
+
+  // Fallback to default weather data for SSR
+  const weatherData = fetchedWeather || defaultWeatherData;
 
   if (!weatherData) return null;
 
@@ -29,8 +37,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
 
   const description = upperFirst(condition.description);
 
-  console.log('render CurrentForecast');
-
+  // [1x1] Render initial view
   if (initial) {
     return (
       <div className="relative">
@@ -49,7 +56,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
             <div className="group max-w-full flex-1 text-center @sm:text-left">
               <h2 className="flex flex-1 items-center text-transparent">
                 <span className="to-wg-700 from-wg-600 bg-gradient-to-r bg-clip-text text-2xl font-black leading-none dark:from-[#9abc26] dark:to-[#fe955e]">
-                  {location.cityName}
+                  {upperFirst(location.cityName)}
                 </span>
               </h2>
               <p className="hidden text-sm opacity-50 @xs:block">{description}</p>
@@ -74,7 +81,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
           </div>
         </div>
 
-        {/* Visible only for wide parent @container if extended info not enabled */}
+        {/* [2x2] Visible only for wide parent @container if extended info not enabled */}
         {!extended && (
           <aside className="hidden items-center border-l border-gray-700/30 pl-2 @container @6xl:flex @6xl:flex-1">
             <ThreeDaysForecastCards />
@@ -82,7 +89,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
         )}
       </div>
 
-      {/* Pass extra weather widget */}
+      {/* [4x4] Pass extra weather widget */}
       {extended && (
         <footer>
           <DailyHourlyForecastTabs />

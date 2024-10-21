@@ -2,9 +2,14 @@
 
 import React, { createContext, useContext, ReactNode } from 'react';
 
+import { useCityNameFromParams } from '@/lib/hooks/useCityNameFromParams';
 import { useWeatherWidget, type UseWeatherReturnType } from '@/lib/hooks/useWeatherWidget';
 
 export interface WeatherWidgetContextType extends UseWeatherReturnType {}
+
+interface WeatherWidgetProviderProps {
+  children: ReactNode;
+}
 
 const WeatherWidgetContext = createContext<WeatherWidgetContextType | undefined>(undefined);
 
@@ -13,10 +18,13 @@ const WeatherWidgetContext = createContext<WeatherWidgetContextType | undefined>
  * This provider is used to provide weather data to the nested widget components
  * All logic encapsulated in useWeatherWidget hook
  * @param children
+ * @param defaults - from cookies
  * @constructor
  */
-export const WeatherWidgetProvider = ({ children }: { children: ReactNode }) => {
-  const value = useWeatherWidget();
+export const WeatherWidgetProvider: FC<WeatherWidgetProviderProps> = ({ children }) => {
+  // Get city name from URL params (path)
+  const cityName = useCityNameFromParams();
+  const value = useWeatherWidget(cityName);
   return <WeatherWidgetContext.Provider value={value}>{children}</WeatherWidgetContext.Provider>;
 };
 
