@@ -14,7 +14,6 @@ import { Button } from '@/components/ui/Button';
  * @constructor
  */
 export const DraggableWidgetDemo: FC = () => {
-  const [currentSize, setCurrentSize] = useState<DropZoneSize>('1x1');
   const [dropZone, setDropZone] = useState<DropZoneSize | null>(null);
   const [canDrag, setCanDrag] = useState(true);
 
@@ -24,15 +23,11 @@ export const DraggableWidgetDemo: FC = () => {
 
   const resetToInitial = () => {
     setDropZone(null);
-    setCurrentSize('1x1');
   };
 
   const moveToDropZone = (dropzoneSize: DropZoneSize) => {
-    setCurrentSize(dropzoneSize);
     setDropZone(dropzoneSize);
   };
-
-  console.log('render DraggableWidgetDemo');
 
   const draggableWidgetProps = {
     canDrag,
@@ -40,12 +35,20 @@ export const DraggableWidgetDemo: FC = () => {
     onDropSuccess: moveToDropZone,
   };
 
+  console.log('render DraggableWidgetDemo');
+
   return (
     <>
-      <Button className="fixed right-2 top-2" size="icon" variant="outline" onClick={toggleDrag} title="Toggle drag mode">
+      <Button
+        className="fixed right-2 top-2"
+        size="icon"
+        variant={canDrag ? 'outline' : 'default'}
+        onClick={toggleDrag}
+        title="Toggle drag mode"
+      >
         {canDrag ? <Unlock /> : <Lock />}
       </Button>
-      {JSON.stringify({ currentSize, dropZone })}
+      {JSON.stringify({ dropZone })}
       {!dropZone && <DraggableWeatherWidget size="1x1" {...draggableWidgetProps} />}
       <div className="flex flex-col gap-5 mt-4">
         {dropZoneSizes.map((size) => (
