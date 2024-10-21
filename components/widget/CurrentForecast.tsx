@@ -10,12 +10,9 @@ import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCar
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
-import type { IWeatherApiResponse } from '@/types/openWeatherMap';
-
 interface CurrentForecastProps {
   extended?: boolean;
   initial?: boolean; // widget initial view 1x1 (icon, temperature)
-  defaultWeatherData?: IWeatherApiResponse; // SSR
 }
 
 /**
@@ -24,11 +21,8 @@ interface CurrentForecastProps {
  * @param extended - render only initial widget info (icon, temperature)
  * @constructor
  */
-export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, defaultWeatherData, initial }) => {
-  const { location, weatherData: fetchedWeather } = useWeatherContext(); // get location from context / city name
-
-  // Fallback to default weather data for SSR
-  const weatherData = fetchedWeather || defaultWeatherData;
+export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initial }) => {
+  const { location, weatherData } = useWeatherContext(); // get location from context / city name
 
   if (!weatherData) return null;
 

@@ -5,16 +5,16 @@ import { cookies } from 'next/headers';
 import { LOCATION_INFO_STORE_KEY } from '@/config/const';
 import { LocationInfoSchema } from '@/lib/zod/locationInfoSchema';
 
-import type { WidgetDefaults } from '@/types/widget';
+import type { TWidgetDefaults } from '@/types/widget';
 
 /**
  * Read location info from cookies (SSR)
  */
-export const readLocationFromCookies = async (): Promise<WidgetDefaults> => {
+export const readLocationFromCookies = async (): Promise<TWidgetDefaults> => {
   const cookieStore = cookies();
   const locationInfoRaw = cookieStore.get(LOCATION_INFO_STORE_KEY)?.value;
 
-  let defaults: WidgetDefaults = null;
+  let defaults: TWidgetDefaults = null;
 
   try {
     if (!locationInfoRaw) return null;

@@ -9,28 +9,34 @@ import { upperFirst } from '@/lib/utils/upperFirst';
 import { CityNameSchema } from '@/lib/zod/cityNameSchema';
 
 import type { IWeatherApiResponse } from '@/types/openWeatherMap';
-import type { LocationInfo, WidgetDefaults } from '@/types/widget';
+import type { ILocationInfo, TWidgetDefaults, TWeatherContextDefaults } from '@/types/widget';
+
+type TRequestLocation = (city: string) => Promise<void>;
+type TWeatherData = IWeatherApiResponse | null;
+type TErrorMsg = string | null;
+type TLoadStatus = boolean;
 
 export interface UseWeatherReturnType {
-  location: LocationInfo;
-  requestLocation: (city: string) => void;
-  loading: boolean;
-  error: string | null;
-  weatherData: IWeatherApiResponse | null;
+  location: ILocationInfo;
+  requestLocation: TRequestLocation;
+  loading: TLoadStatus;
+  error: TErrorMsg;
+  weatherData: TWeatherData;
 }
 
 /**
  * ✨ Main hook for WeatherWidget and WeatherWidgetContext
  * Encapsulates all logic for fetching weather data
- * @param cityNameFromParam - City name to fetch weather data on initial load, if not provided - get from browser API
+ * @param defaults - SSR
  */
-export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnType => {
-  const [location, setLocation] = useState<LocationInfo>({ coordinates: { lat: 0, lon: 0 }, cityName: cityNameFromParam || 'default' });
-  const [loading, setLoading] = useState<UseWeatherReturnType['loading']>(true);
-  const [error, setError] = useState<UseWeatherReturnType['error']>(null);
-  const [weatherData, setWeatherData] = useState<UseWeatherReturnType['weatherData']>(null);
+export const useWeatherWidget = (defaults?: TWeatherContextDefaults): UseWeatherReturnType => {
+  const defaultCityName = defaults?.location?.cityName || '';
+  const [location, setLocation] = useState<ILocationInfo>({ coordinates: { lat: 0, lon: 0 }, cityName: defaultCityName || 'default' });
+  const [loading, setLoading] = useState<TLoadStatus>(!defaults?.weatherData);
+  const [error, setError] = useState<TErrorMsg>(null);
+  const [weatherData, setWeatherData] = useState<TWeatherData>(defaults?.weatherData || null);
 
-  const getLocationFromCookies = async (cityName?: string): Promise<[WidgetDefaults, boolean]> => {
+  const getLocationFromCookies = async (cityName?: string): Promise<[TWidgetDefaults, boolean]> => {
     // Fetch coordinates and update location
     const storedLocation = await readLocationFromCookies();
     const isLocationMatch = storedLocation?.cityName.toLowerCase() === cityName?.toLowerCase() && !!storedLocation?.coordinates;
@@ -43,7 +49,7 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
    * 2. On user request (fetch from API)
    * 3. Store location info in cookies (for SSR)
    */
-  const updateLocation = async ({ cityName, coordinates }: LocationInfo) => {
+  const updateLocation = async ({ cityName, coordinates }: ILocationInfo) => {
     const locationInfo = { cityName: upperFirst(cityName), coordinates };
     setLocation(locationInfo);
     setError(null);
@@ -69,17 +75,18 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
    * - Validate city name
    * - Try to get default coordinates from cookies if not provided -> fetch coordinates by city name
    */
-  const requestLocation = useCallback(
-    async (rawCityName: string) => {
+  const requestLocation: TRequestLocation = useCallback(
+    async (rawCityName) => {
       try {
         // Validate city name
         const { success, error, data: cityName } = CityNameSchema.safeParse(rawCityName);
         if (!success) {
-          return setError(error.errors[0].message);
+          setError(error.errors[0].message);
+          return;
         }
 
         // Fetch coordinates and update location
-        const [storedLocation, isLocationMatch] = await getLocationFromCookies(cityNameFromParam);
+        const [storedLocation, isLocationMatch] = await getLocationFromCookies(defaultCityName);
         const coordinates = isLocationMatch && storedLocation ? storedLocation.coordinates : await getCoordinatesByCityName(cityName);
 
         await updateLocation({ cityName, coordinates });
@@ -87,7 +94,7 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
         updateError(e);
       }
     },
-    [cityNameFromParam],
+    [defaultCityName],
   );
 
   /**
@@ -98,14 +105,14 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
    */
   useEffect(() => {
     // Skip init phase if city name provided from URL (SSR) | or weather data already fetched
-    if (cityNameFromParam || weatherData) {
+    if (defaultCityName || weatherData) {
       return;
     }
 
     // Fetch location data from browser API
     const fetchLocationData = async () => {
       try {
-        const [storedLocation] = await getLocationFromCookies(cityNameFromParam);
+        const [storedLocation] = await getLocationFromCookies(defaultCityName);
 
         // Try restore location from cookies
         if (storedLocation) {
@@ -127,7 +134,7 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
     };
 
     fetchLocationData();
-  }, [cityNameFromParam, weatherData]);
+  }, [defaultCityName, weatherData]);
 
   return { location, requestLocation, loading, error, weatherData };
 };

@@ -23,4 +23,9 @@ declare global {
     params: Partial<Params>;
     searchParams: Partial<SearchParams>;
   };
+  type PossibleNull<T> =
+    | {
+        [K in keyof T]: T[K] | null;
+      }
+    | null;
 }
