@@ -27,7 +27,14 @@ export default function ToggleTheme() {
   };
 
   return (
-    <Button className="size-7" suppressHydrationWarning onClick={toggleTheme} aria-label="Toggle theme" variant="outline" size="icon">
+    <Button
+      className="size-7 animate-in"
+      suppressHydrationWarning
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+      variant="outline"
+      size="icon"
+    >
       <span
         className={cn(
           'size-4',
