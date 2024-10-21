@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { LOCATION_INFO_STORE_KEY } from '@/config/const';
 import { getCurrentLocaleCode, getClientCoordinates } from '@/lib/api/browserAPIs';
 import { fetchWeatherDataByCoordinates, getCoordinatesByCityName, getCityNameByCoordinates } from '@/lib/api/openWeatherMap';
-import { setCookie, readCookie } from '@/lib/helpers/cookies';
+import { setCookie } from '@/lib/helpers/cookies';
 import { readLocationFromCookies } from '@/lib/helpers/readLocationFromCookies';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { CityNameSchema } from '@/lib/zod/cityNameSchema';
@@ -38,9 +38,10 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
   };
 
   /**
-   * Update location state
+   * Update location state -> fetch weather data
    * 1. On initial load (get from browser)
    * 2. On user request (fetch from API)
+   * 3. Store location info in cookies (for SSR)
    */
   const updateLocation = async ({ cityName, coordinates }: LocationInfo) => {
     const locationInfo = { cityName: upperFirst(cityName), coordinates };
@@ -49,7 +50,7 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
     try {
       const weather = await fetchWeatherDataByCoordinates(coordinates);
       setWeatherData(weather);
-      setCookie(LOCATION_INFO_STORE_KEY, JSON.stringify(locationInfo), 7); // Expires in 7 days
+      setCookie(LOCATION_INFO_STORE_KEY, JSON.stringify(locationInfo)); // Expires in 7 days
     } catch (e) {
       console.log('[updateLocation] Error fetching weather data:', e);
     }
@@ -65,8 +66,8 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
   /**
    * Request location by city name
    * NOTE: This function also passed to the context and should be wrapped in useCallback!
-   * 1. Validate city name
-   * 2. Try to get default coordinates from cookies if not provided -> fetch coordinates by city name
+   * - Validate city name
+   * - Try to get default coordinates from cookies if not provided -> fetch coordinates by city name
    */
   const requestLocation = useCallback(
     async (rawCityName: string) => {
@@ -90,16 +91,14 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
   );
 
   /**
-   * [INITIAL LOAD]
-   * 1. Try read location from cookies
-   * 1.2. If found - update location and fetch weather data
-   * 1.3. If not found - fetch location and get locale code using browser APIs
-   * 2. If weather data already fetched - skip re-fetch (re-render case)
+   * [INITIAL LOAD] -> will be skipped if city name provided or weather data already fetched
+   * Try read location from cookies
+   * - If found - update location and fetch weather data
+   * - If not found - fetch location and get locale code using browser APIs
    */
   useEffect(() => {
-    // When default city provided - fetch weather data and don't try to get location from browser
-    if (cityNameFromParam) {
-      // requestLocation(defaultCity);
+    // Skip init phase if city name provided from URL (SSR) | or weather data already fetched
+    if (cityNameFromParam || weatherData) {
       return;
     }
 
@@ -119,8 +118,6 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
         const coordinates = await getClientCoordinates();
         const cityName = await getCityNameByCoordinates(coordinates, loc);
 
-        if (weatherData) return; // re-render case
-
         await updateLocation({ cityName, coordinates });
       } catch (e) {
         updateError(e);
@@ -130,7 +127,7 @@ export const useWeatherWidget = (cityNameFromParam?: string): UseWeatherReturnTy
     };
 
     fetchLocationData();
-  }, [cityNameFromParam, requestLocation]);
+  }, [cityNameFromParam, weatherData]);
 
   return { location, requestLocation, loading, error, weatherData };
 };

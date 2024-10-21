@@ -24,13 +24,13 @@ const WeatherForm: RC<{ defaultValue?: string }> = ({ defaultValue }) => {
     if (!success) return;
 
     requestLocation(cityName);
-    router.replace(`/${cityName.trim().toLowerCase()}`);
+    router.replace(`/${cityName.trim().toLowerCase()}`, { scroll: false });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex max-w-md gap-2">
+    <form key="form" onSubmit={handleSubmit} className="flex max-w-md gap-2">
       <Input
-        autoFocus
+        autoFocus={!!defaultValue}
         className="max-w-[200px]"
         type="text"
         value={cityName}
