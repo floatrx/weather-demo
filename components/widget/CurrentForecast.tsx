@@ -85,7 +85,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
 
       {/* [4x4] Pass extra weather widget */}
       {extended && (
-        <footer>
+        <footer className="hidden @lg:block">
           <DailyHourlyForecastTabs />
         </footer>
       )}
