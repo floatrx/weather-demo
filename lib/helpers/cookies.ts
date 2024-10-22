@@ -1,5 +1,9 @@
 'use client';
 
+import { LOCATION_INFO_STORE_KEY } from '@/config/const';
+
+import type { ILocationInfo } from '@/types/widget';
+
 /**
  * Sets a cookie with the given name, value, and expiration days.
  * This helper function is used to store the location information in a cookie on client side only!
@@ -26,3 +30,8 @@ export function readCookie(name: string): string | null {
   }
   return null;
 }
+
+export const saveLocationInfoToCookie = (locationInfo: ILocationInfo): void => {
+  const safeData = JSON.stringify({ ...locationInfo, cityName: encodeURIComponent(locationInfo.cityName) });
+  setCookie(LOCATION_INFO_STORE_KEY, safeData);
+};

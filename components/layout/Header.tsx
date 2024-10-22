@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { NavLink } from '@/components/ui/NavLink';
 import { site } from '@/config/const';
 
@@ -16,6 +17,9 @@ export const Header: RC = () => (
         ))}
         <li>
           <ToggleTheme />
+        </li>
+        <li>
+          <LocaleSwitcher />
         </li>
       </ul>
     </nav>

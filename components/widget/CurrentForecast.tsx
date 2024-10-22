@@ -8,7 +8,7 @@ import { DailyHourlyForecastTabs } from '@/components/widget/DailyHourlyForecast
 import { Temperature } from '@/components/widget/Temperature';
 import { ThreeDaysForecastCards } from '@/components/widget/ThreeDaysForecastCards';
 import { WeatherIcon } from '@/components/widget/WeatherIcon';
-import { upperFirst } from '@/lib/utils/upperFirst';
+import { upperFirst, formatCityName } from '@/lib/utils/upperFirst';
 
 interface CurrentForecastProps {
   extended?: boolean;
@@ -50,7 +50,7 @@ export const CurrentForecast: RC<CurrentForecastProps> = memo(({ extended, initi
             <div className="group max-w-full flex-1 text-center @sm:text-left">
               <h2 className="flex flex-1 items-center text-transparent">
                 <span className="to-wg-700 from-wg-600 bg-gradient-to-r bg-clip-text text-2xl font-black leading-none dark:from-[#9abc26] dark:to-[#fe955e]">
-                  {upperFirst(location.cityName)}
+                  {formatCityName(location.cityName)}
                 </span>
               </h2>
               <p className="hidden text-sm opacity-50 @xs:block">{description}</p>

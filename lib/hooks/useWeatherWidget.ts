@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 
+import { useLocale } from '@/components/context/LocaleProvider';
 import { LOCATION_INFO_STORE_KEY } from '@/config/const';
 import { getCurrentLocaleCode, getClientCoordinates } from '@/lib/api/browserAPIs';
 import { fetchWeatherDataByCoordinates, getCoordinatesByCityName, getCityNameByCoordinates } from '@/lib/api/openWeatherMap';
-import { setCookie } from '@/lib/helpers/cookies';
+import { setCookie, saveLocationInfoToCookie } from '@/lib/helpers/cookies';
 import { readLocationFromCookies } from '@/lib/helpers/readLocationFromCookies';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { CityNameSchema } from '@/lib/zod/cityNameSchema';
+import { LocationInfoSchema } from '@/lib/zod/locationInfoSchema';
 
 import type { IWeatherApiResponse } from '@/types/openWeatherMap';
 import type { ILocationInfo, TWidgetDefaults, TWeatherContextDefaults } from '@/types/widget';
@@ -31,10 +33,18 @@ export interface UseWeatherReturnType {
  */
 export const useWeatherWidget = (defaults?: TWeatherContextDefaults): UseWeatherReturnType => {
   const defaultCityName = defaults?.location?.cityName || '';
-  const [location, setLocation] = useState<ILocationInfo>({ coordinates: { lat: 0, lon: 0 }, cityName: defaultCityName || 'default' });
+
+  const [location, setLocation] = useState<ILocationInfo>(
+    defaults?.location || {
+      coordinates: { lat: -999, lon: -999 },
+      cityName: 'default',
+    },
+  );
   const [loading, setLoading] = useState<TLoadStatus>(!defaults?.weatherData);
   const [error, setError] = useState<TErrorMsg>(null);
   const [weatherData, setWeatherData] = useState<TWeatherData>(defaults?.weatherData || null);
+
+  const { lang } = useLocale();
 
   const getLocationFromCookies = async (cityName?: string): Promise<[TWidgetDefaults, boolean]> => {
     // Fetch coordinates and update location
@@ -56,7 +66,7 @@ export const useWeatherWidget = (defaults?: TWeatherContextDefaults): UseWeather
     try {
       const weather = await fetchWeatherDataByCoordinates(coordinates);
       setWeatherData(weather);
-      setCookie(LOCATION_INFO_STORE_KEY, JSON.stringify(locationInfo)); // Expires in 7 days
+      saveLocationInfoToCookie(locationInfo);
     } catch (e) {
       console.log('[updateLocation] Error fetching weather data:', e);
     }
@@ -121,7 +131,7 @@ export const useWeatherWidget = (defaults?: TWeatherContextDefaults): UseWeather
         }
 
         // Get current locale and coordinates from browser APIs
-        const loc = getCurrentLocaleCode();
+        const loc = lang || getCurrentLocaleCode();
         const coordinates = await getClientCoordinates();
         const cityName = await getCityNameByCoordinates(coordinates, loc);
 

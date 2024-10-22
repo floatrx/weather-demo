@@ -1,7 +1,7 @@
 import { WeatherForm } from '@/components/form/WeatherForm';
 import { Heading } from '@/components/ui/Heading';
 import { SimpleWeatherWidget } from '@/components/widget/SimpleWeatherWidget';
-import { upperFirst } from '@/lib/utils/upperFirst';
+import { upperFirst, formatCityName } from '@/lib/utils/upperFirst';
 
 export async function generateMetadata({ params }: { params: { cityName: string } }) {
   const { cityName } = params;
@@ -17,7 +17,7 @@ interface Props {
 export default async function WeatherByCity({ params }: Props) {
   return (
     <>
-      <Heading>Weather in {upperFirst(params.cityName)}</Heading>
+      <Heading>Weather in {formatCityName(params.cityName)}</Heading>
       <SimpleWeatherWidget />
       <WeatherForm defaultValue={params.cityName} />
     </>

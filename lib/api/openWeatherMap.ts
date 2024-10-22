@@ -12,7 +12,7 @@ export const getCoordinatesByCityName = async (city: string): Promise<ICoordinat
   const response = await fetch(`${OPEN_WEATHER_MAP_API_URL}/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`);
   const data = await response.json();
   if (!data.length) {
-    throw new Error('City not found');
+    throw new Error(`[getCoordinatesByCityName] City ${city} not found`);
   }
   return { lat: data[0].lat, lon: data[0].lon };
 };
@@ -25,9 +25,9 @@ export const getCityNameByCoordinates = async ({ lat, lon }: ICoordinates, loc: 
   const data = await response.json();
   if (data.length > 0) {
     const [variants] = data;
-    return variants[loc] ?? variants.name; // City name
+    return variants.local_names[loc] ?? variants.name; // City name
   } else {
-    throw new Error('City not found');
+    throw new Error(`[getCityNameByCoordinates] City with coordinates ${JSON.stringify({ lat, lon })} not found`);
   }
 };
 

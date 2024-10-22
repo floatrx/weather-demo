@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "demos": "Demos"
+  },
+  "form": {
+    "enterCityName": "Enter city name",
+    "submit": "Submit"
+  },
+  "summary": {
+    "heading": "Summary info",
+    "content": [
+      "This is a Next.js] project demonstrating the use of the OpenWeatherMap API to display the current weather in a city. Weather widget adaptively changes its appearance based on the parent container&#39;s width.",
+      "This page is a simple example of how to use the WeatherWidgetProvider context to provide weather data to the SimpleWeatherWidget component."
+    ]
+  },
+  "demos": {
+    "heading": "Weather widget demos",
+    "content": []
+  }
+}

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState, useCallback } from 'react';
 
+import { useLocale } from '@/components/context/LocaleProvider';
 import { useWeatherContext } from '@/components/context/WeatherWidgetContext';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -19,6 +20,7 @@ export const WeatherForm: RC<{ defaultValue?: string }> = ({ defaultValue }) => 
   const { requestLocation } = useWeatherContext();
   const [cityName, setCityName] = useState(defaultValue || '');
   const router = useRouter();
+  const { dict, lang } = useLocale();
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent) => {
@@ -29,7 +31,7 @@ export const WeatherForm: RC<{ defaultValue?: string }> = ({ defaultValue }) => 
       try {
         await getCoordinatesByCityName(cityName);
         await requestLocation(cityName);
-        router.replace(`/${cityName.trim().toLowerCase()}`, { scroll: false });
+        router.replace(`/${lang}/${cityName.trim().toLowerCase()}`, { scroll: false });
       } catch (e) {
         if (!(e instanceof Error)) return;
         setErrorMsg(e.message);
@@ -46,9 +48,9 @@ export const WeatherForm: RC<{ defaultValue?: string }> = ({ defaultValue }) => 
   return (
     <>
       <form key="form" onSubmit={handleSubmit} className="flex max-w-md gap-2 animate-show delay-100">
-        <Input className="max-w-[200px]" type="text" value={cityName} onChange={handleChange} placeholder="Enter city name" />
+        <Input className="max-w-[200px]" type="text" value={cityName} onChange={handleChange} placeholder={dict.form.enterCityName} />
         <Button variant="outline" type="submit" size="lg" className="px-4 text-md">
-          Submit
+          {dict.form.submit}
         </Button>
       </form>
       {errorMsg && (
