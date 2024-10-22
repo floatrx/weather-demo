@@ -37,7 +37,7 @@ export const WeatherForm: RC<{ defaultValue?: string }> = ({ defaultValue }) => 
         setErrorMsg(e.message);
       }
     },
-    [cityName, requestLocation, router],
+    [cityName, lang, requestLocation, router],
   );
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {

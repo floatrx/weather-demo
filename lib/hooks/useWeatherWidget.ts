@@ -1,14 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { useLocale } from '@/components/context/LocaleProvider';
-import { LOCATION_INFO_STORE_KEY } from '@/config/const';
 import { getCurrentLocaleCode, getClientCoordinates } from '@/lib/api/browserAPIs';
 import { fetchWeatherDataByCoordinates, getCoordinatesByCityName, getCityNameByCoordinates } from '@/lib/api/openWeatherMap';
-import { setCookie, saveLocationInfoToCookie } from '@/lib/helpers/cookies';
+import { saveLocationInfoToCookie } from '@/lib/helpers/cookies';
 import { readLocationFromCookies } from '@/lib/helpers/readLocationFromCookies';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { CityNameSchema } from '@/lib/zod/cityNameSchema';
-import { LocationInfoSchema } from '@/lib/zod/locationInfoSchema';
 
 import type { IWeatherApiResponse } from '@/types/openWeatherMap';
 import type { ILocationInfo, TWidgetDefaults, TWeatherContextDefaults } from '@/types/widget';
@@ -144,7 +142,7 @@ export const useWeatherWidget = (defaults?: TWeatherContextDefaults): UseWeather
     };
 
     fetchLocationData();
-  }, [defaultCityName, weatherData]);
+  }, [defaultCityName, lang, weatherData]);
 
   return { location, requestLocation, loading, error, weatherData };
 };

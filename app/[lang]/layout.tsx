@@ -11,7 +11,6 @@ import { getDictionary } from '@/lib/i18n/getDictionary';
 import type { Metadata } from 'next';
 
 import '../../styles/globals.css';
-import dayjs from 'dayjs';
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
