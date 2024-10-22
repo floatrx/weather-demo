@@ -6,7 +6,7 @@ export const LOCATION_INFO_STORE_KEY = 'weatherWidget';
 
 export const site = {
   links: [
-    { href: '/', label: 'Info' },
+    { href: '/info', label: 'Info' },
     { href: '/demos', label: 'Demos' },
     { href: '/dnd', label: 'Drag&Drop' },
   ],

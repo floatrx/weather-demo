@@ -1,11 +1,10 @@
-import { WeatherWidgetProvider } from '@/components/context/WeatherWidgetContext';
 import { WeatherForm } from '@/components/form/WeatherForm';
 import { Heading } from '@/components/ui/Heading';
 import { SimpleWeatherWidget } from '@/components/widget/SimpleWeatherWidget';
 
-export default async function Home() {
+export default async function Demo() {
   return (
-    <WeatherWidgetProvider>
+    <>
       <Heading>Summary info</Heading>
       <WeatherForm />
       <p className="max-w-lg animate-show delay-150">
@@ -17,6 +16,6 @@ export default async function Home() {
         component.
       </p>
       <SimpleWeatherWidget />
-    </WeatherWidgetProvider>
+    </>
   );
 }
