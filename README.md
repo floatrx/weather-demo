@@ -12,6 +12,16 @@ Weather widget adaptively changes its appearance based on the parent container's
 
 ![Screenshot](public/screenshot.png)
 
+### CSR
+Views from `(demo)` group are partially rendered on the client side.
+
+The reason is that from the homepage, we can't determine the path of the page (cityName). Also, at this point, cookies are not available. There is no reason to render the page on the server side or to render it on the server and then hydrate it on the client side.
+
+### SSR
+Views `[cityName]` are rendered on the server side.
+After the first visit, the app saves the locationInfo in cookies. On subsequent visits, we can determine the required data (cityName, coordinates) from cookies.
+
+
 ## Getting Started
 
 First, run the development server:

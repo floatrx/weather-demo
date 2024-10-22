@@ -1,7 +1,5 @@
 'use client';
 
-import { ThemeProvider } from '@/components/context/ThemeProvider';
-
 import { WeatherWidgetProvider } from './WeatherWidgetContext';
 
 import type { TWeatherContextDefaults } from '@/types/widget';
@@ -20,7 +18,5 @@ interface Props {
  * @constructor
  */
 export const Providers: FC<Props> = ({ children, defaultWeatherData }) => (
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-    <WeatherWidgetProvider defaults={defaultWeatherData}>{children}</WeatherWidgetProvider>
-  </ThemeProvider>
+  <WeatherWidgetProvider defaults={defaultWeatherData}>{children}</WeatherWidgetProvider>
 );

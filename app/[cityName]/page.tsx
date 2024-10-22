@@ -1,7 +1,6 @@
 import { WeatherForm } from '@/components/form/WeatherForm';
 import { Heading } from '@/components/ui/Heading';
-import { SimpleCard } from '@/components/ui/SimpleCard';
-import { CurrentForecast } from '@/components/widget/CurrentForecast';
+import { SimpleWeatherWidget } from '@/components/widget/SimpleWeatherWidget';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
 export async function generateMetadata({ params }: { params: { cityName: string } }) {
@@ -19,9 +18,7 @@ export default async function WeatherByCity({ params }: Props) {
   return (
     <>
       <Heading>Weather in {upperFirst(params.cityName)}</Heading>
-      <SimpleCard className="w-full max-h-[380px] animate-show">
-        <CurrentForecast extended />
-      </SimpleCard>
+      <SimpleWeatherWidget />
       <WeatherForm defaultValue={params.cityName} />
     </>
   );

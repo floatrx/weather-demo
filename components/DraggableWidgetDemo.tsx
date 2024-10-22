@@ -3,9 +3,9 @@
 import { Lock, Unlock } from 'lucide-react';
 import React, { useState } from 'react';
 
-import { DraggableWeatherWidget } from '@/components/DraggableWeatherWidget';
 import { type DropZoneSize, WidgetsDropZone } from '@/components/dragndrop/WidgetsDropZone';
 import { Button } from '@/components/ui/Button';
+import { DraggableWeatherWidget } from '@/components/widget/DraggableWeatherWidget';
 
 /**
  * Draggable widget demo view
